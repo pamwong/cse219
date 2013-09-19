@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <property_list>    
+        <property name="GAME_TITLE_TEXT" value="Jotto - pet slova reči igra"></property>
+        
+        <!-- THESE ARE THE GUI IMAGES -->
+        <property name="GAME_IMG_NAME"          value="SB_Game.png"></property>
+        <property name="STATS_IMG_NAME"         value="SB_Stats.png"></property>
+        <property name="HELP_IMG_NAME"          value="SB_Help.png"></property>
+        <property name="EXIT_IMG_NAME"          value="SB_Exit.png"></property>
+        <property name="NEW_GAME_IMG_NAME"      value="SB_NewGame.png"></property>
+        <property name="HOME_IMG_NAME"          value="SB_Home.png"></property>
+        
+        <!-- DATA FILES TO LOAD -->
+        <property name="WORD_LIST_FILE_NAME"    value="SB_FiveLetterWordsList.txt"></property>
+        <property name="GAME_FILE_NAME"         value="SB_GameDisplay.html"></property>
+        <property name="STATS_FILE_NAME"        value="SB_StatsDisplay.html"></property>
+        <property name="HELP_FILE_NAME"         value="SB_Help.html"></property>
+        
+        <!-- IN-GAME TEXT -->
+        <property name="GUESS_LABEL"            value="Nagadati: "></property>
+        <property name="GAME_SUBHEADER_TEXT"    value="Nagađanje (Broj slova u tajnoj reči)"></property>
+        <property name="WIN_DISPLAY_TEXT"       value="Ti si pobedio"></property>
+        <property name="GAME_RESULTS_TEXT"      value="Igra rezultati"></property>
+        <property name="EXIT_REQUEST_TEXT"      value="Da li ste sigurni da želite da prekinete?"></property>
+        <property name="YES_TEXT"               value="Da"></property>
+        <property name="NO_TEXT"                value="Neh"></property>
+        
+        <!-- TOOLTIPS -->
+        <property name="GAME_TOOLTIP"           value="Idi na igru ekran"></property>
+        <property name="STATS_TOOLTIP"          value="Idi na Stats Rezime ekran"></property>
+        <property name="HELP_TOOLTIP"           value="Idite na ekran pomoći"></property>
+        <property name="EXIT_TOOLTIP"           value="Izađete iz aplikacije igre"></property>
+        <property name="NEW_GAME_TOOLTIP"       value="Započnite novu igru"></property>
+        <property name="HOME_TOOLTIP"           value="Go Home Page na Jotto Pomoć"></property>
+        
+        <!-- ERROR FEEDBACK TEXT -->
+        <property name="ERROR_DIALOG_TITLE_TEXT"            value="An Error Has Occured"></property>
+        <property name="DUPLICATE_WORD_ERROR_TEXT"          value="That word has already been guessed"></property>
+        <property name="IMAGE_LOADING_ERROR_TEXT"           value="An image was unable to load properly"></property>
+        <property name="INVALID_URL_ERROR_TEXT"             value="Attempting to load a page with an invalid URL"></property>
+        <property name="INVALID_DOC_ERROR_TEXT"             value="Error encountered editing an HTML Document"></property>
+        <property name="INVALID_XML_FILE_ERROR_TEXT"        value="Invalid XML properties file"></property>
+        <property name="INVALID_DICTIONARY_ERROR_TEXT"      value="Error occured loading the dictionary"></property>
+    </property_list>   
+	
+	<!--HAVE TO INSERT SERBIAN ALPHABET LATER-->
+    <property_options_list>
+        <property_options name="LETTER_OPTIONS">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+            <option>P</option>
+            <option>Q</option>
+            <option>R</option>
+            <option>S</option>
+            <option>T</option>
+            <option>U</option>
+            <option>V</option>
+            <option>W</option>
+            <option>X</option>
+            <option>Y</option>
+            <option>Z</option>
+        </property_options>
+    </property_options_list>
+</properties>
