@@ -124,8 +124,19 @@ public class JottoGameData
      */
     public int calcLettersInGuess(String guess)
     {
-        // YOU WILL NEED TO PROVIDE AN IMPLEMENTATION
-        return 0;
+        // Initialize number of correct letters as zero
+        int correctLetters = 0;
+        
+        // Checks how many letters are correct against the secret word
+        for(int i = 0; i < secretWord.length(); i++)
+        {
+            for(int j = 0; j < guess.length(); j++)
+            {
+              if(guess.charAt(j) == secretWord.charAt(i))
+                correctLetters++;
+            }
+        }
+        return correctLetters;
     }
     
     /**
@@ -137,7 +148,8 @@ public class JottoGameData
      */
     public void guess(String guessWord)
     {
-        // YOU WILL NEED TO PROVIDE AN IMPLEMENTATION
+        if(guessWord.equals(secretWord))
+            wordFound = true;
     }
 
     /**

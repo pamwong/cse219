@@ -171,6 +171,9 @@ public class JottoDocumentManager
                 +   lettersInGuess
                 +   CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;    
         
+        String win = "YOU WIN";
+        htmlText += START_TAG + win + END_TAG + NL;
+        
         // RETURN THE COMPLETED HTML
         return htmlText;
     }
