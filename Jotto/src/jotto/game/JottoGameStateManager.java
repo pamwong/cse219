@@ -300,6 +300,7 @@ public class JottoGameStateManager
             currentGameState = JottoGameState.GAME_OVER;
             
             // PRINT "YOU WIN"
+            ui.getDocManager().addWinText();
             
             // ADD THE COMPLETED GAME TO THE HISTORY
             gamesHistory.add(gameInProgress);

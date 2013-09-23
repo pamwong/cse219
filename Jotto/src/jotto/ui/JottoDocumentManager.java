@@ -169,10 +169,7 @@ public class JottoDocumentManager
         // GUESS THAT ARE IN THE SECRET WORD
         htmlText +=   SPACE + OPEN_PAREN
                 +   lettersInGuess
-                +   CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;    
-        
-        String win = "YOU WIN";
-        htmlText += START_TAG + win + END_TAG + NL;
+                +   CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
         
         // RETURN THE COMPLETED HTML
         return htmlText;
@@ -246,4 +243,21 @@ public class JottoDocumentManager
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }
     }
-}
+    
+    public void addWinText()
+    {
+        JottoGameStateManager gsm = ui.getGSM();
+        try
+        {
+            Element win = gameDoc.getElement(WIN_DISPLAY_ID);
+            String htmlText = "You Win!";
+            gameDoc.insertBeforeEnd(win, htmlText);
+        }
+        catch (BadLocationException | IOException ex)
+        {
+            JottoErrorHandler errorHandler = ui.getErrorHandler();
+            errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
+        }        
+        
+    }
+}   
