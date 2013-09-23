@@ -302,6 +302,10 @@ public class JottoGameStateManager
             // PRINT "YOU WIN"
             ui.getDocManager().addWinText();
             
+            /****
+             * add functionality such that user cannot enter more guesses
+             */
+            
             // ADD THE COMPLETED GAME TO THE HISTORY
             gamesHistory.add(gameInProgress);
             
@@ -315,4 +319,36 @@ public class JottoGameStateManager
         // AND EMPTY THE TEXT FIELD
         ui.clearGuessTextField();
     }
+    
+      /**
+     * Counts and returns the number of wins during this game session.
+     * 
+     * @return The number of games in that have been completed that
+     * the player won.
+     */
+    public String getFastestWin()
+    {
+        // ITERATE THROUGH ALL THE COMPLETED GAMES
+        Iterator<JottoGameData> it = gamesHistory.iterator();
+        JottoGameData game = it.next();
+        long shortestTime = game.getTimeOfGame();
+        JottoGameData fastestGame = game;
+        
+        while(it.hasNext())
+        {
+            // GET THE NEXT GAME IN THE SEQUENCE
+            game = it.next();
+
+            if (game.getTimeOfGame() < shortestTime)
+            {
+                shortestTime = game.getTimeOfGame();
+                fastestGame = game;
+            }
+        }
+        
+        
+        return game.toString();
+        
+    }
+
 }

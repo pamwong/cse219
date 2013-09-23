@@ -3,6 +3,8 @@ package jotto.ui;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTML;
@@ -164,7 +166,7 @@ public class JottoDocumentManager
 
         // HERE WE'RE PUTTING THE GUESS IN THE LIST ITEM
         htmlText += guess;
-
+       
         // NOW ADD INFORMATION ABOUT THE NUMBER OF LETTERS IN THE
         // GUESS THAT ARE IN THE SECRET WORD
         htmlText +=   SPACE + OPEN_PAREN
@@ -224,6 +226,7 @@ public class JottoDocumentManager
         JottoGameStateManager gsm = ui.getGSM();
         int gamesPlayed = gsm.getGamesPlayed();
         int wins = gsm.getWins();
+        String fastWin = gsm.getFastestWin();
         
         try
         {
@@ -233,6 +236,17 @@ public class JottoDocumentManager
 
             Element winsElement = statsDoc.getElement(WINS_ID);
             statsDoc.setInnerHTML(winsElement, EMPTY_TEXT + wins);
+            
+            Element lossesElement = statsDoc.getElement(LOSSES_ID);
+            statsDoc.setInnerHTML(lossesElement, EMPTY_TEXT + (gamesPlayed-wins));
+            
+            Element fewestWin = statsDoc.getElement(FEWEST_GUESSES_ID);
+            statsDoc.setInnerHTML(fewestWin, EMPTY_TEXT);
+            
+            Element fastestWin = statsDoc.getElement(FASTEST_WIN_ID);
+            statsDoc.setInnerHTML(fastestWin, EMPTY_TEXT + fastWin);
+            
+            
         }
         // WE'LL LET THE ERROR HANDLER TAKE CARE OF ANY ERRORS,
         // WHICH COULD HAPPEN IF XML SETUP FILES ARE IMPROPERLY
@@ -244,9 +258,11 @@ public class JottoDocumentManager
         }
     }
     
+    /**
+     * This method displays the "You Win!"
+     */
     public void addWinText()
     {
-        JottoGameStateManager gsm = ui.getGSM();
         try
         {
             Element win = gameDoc.getElement(WIN_DISPLAY_ID);
@@ -257,7 +273,29 @@ public class JottoDocumentManager
         {
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
-        }        
-        
+        }           
+    }
+    
+    /*****
+     * 
+     * @param letter letter to be highlighted
+     */
+    public void updateGuesses(char letter)
+    {   
+        try
+        {
+            String color = "red";
+            String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+            String test = "<font style=background-color:red>HELLO</font>";
+            Element e = gameDoc.getElement(GUESSES_LIST_ID);
+            System.out.println(e.toString());
+            gameDoc.insertBeforeStart(e, test);
+        }
+        catch (BadLocationException | IOException ex)
+        {
+            JottoErrorHandler errorHandler = ui.getErrorHandler();
+            errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
+        }           
+ 
     }
 }   

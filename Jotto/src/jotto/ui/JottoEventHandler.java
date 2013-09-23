@@ -115,6 +115,19 @@ public class JottoEventHandler
      */
     public void respondToToggleLetterButtonRequest(Object source)
     {
+        // GETS BUTTON TEXT
+        JButton b = null;
+        String buttonText = "";
+
+        if(source instanceof JButton)
+        b = (JButton)source;
+
+        if(b != null)
+        buttonText = b.getText();
+           
+        // TOGGLE GUESSES' BACKGROUND COLOR
+        ui.getDocManager().updateGuesses(buttonText.charAt(0));
+        
         // GET THE BUTTON THAT WAS PRESSED
         JButton letterButton = (JButton)source;
         
@@ -124,6 +137,7 @@ public class JottoEventHandler
         {
             letterButton.setBackground(Color.GREEN);
             letterButton.setForeground(Color.BLUE);
+            
         }
         else if (currentBackgroundColor == Color.GREEN)
         {

@@ -166,13 +166,13 @@ public class JottoGameData
     /**
      * Builds and returns a texual summary of this game.
      * 
-     * @return A textual summary of this game, including the secred word,
+     * @return A textual summary of this game, including the secret word,
      * the time of the game, and a listing of all the guesses.
      */
     @Override
     public String toString()
     {
-        // CALCULATE GAME TIEM USING HOURS : MINUTES : SECONDS
+        // CALCULATE GAME TIME USING HOURS : MINUTES : SECONDS
         long timeInMillis = this.getTimeOfGame();
         long hours = timeInMillis/MILLIS_IN_AN_HOUR;
         timeInMillis -= hours * MILLIS_IN_AN_HOUR;        
