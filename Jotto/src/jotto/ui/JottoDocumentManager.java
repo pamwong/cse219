@@ -256,7 +256,7 @@ public class JottoDocumentManager
             
             Element resultsList = statsDoc.getElement(GAME_RESULTS_LIST_ID);
             String htmlText = buildResultsList();
-            statsDoc.insertBeforeEnd(resultsList, htmlText);
+            statsDoc.setInnerHTML(resultsList, htmlText);
             
             
             
