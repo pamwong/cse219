@@ -223,7 +223,10 @@ public class JottoDocumentManager
     public void addGameResultToStatsPage(JottoGameData completedGame)
     {
         // GET THE GAME STATS
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
         JottoGameStateManager gsm = ui.getGSM();
+        
+        
         int gamesPlayed = gsm.getGamesPlayed();
         int wins = gsm.getWins();
         String fewWin = gsm.getFewestGuesses();
@@ -247,6 +250,9 @@ public class JottoDocumentManager
             Element fastestWin = statsDoc.getElement(FASTEST_WIN_ID);
             statsDoc.setInnerHTML(fastestWin, EMPTY_TEXT + fastWin);
             
+            String resultsSubheaderText = props.getProperty(JottoPropertyType.GAME_RESULTS_TEXT);
+            Element gameResults = statsDoc.getElement(GAME_RESULTS_HEADER_ID);
+            statsDoc.setInnerHTML(gameResults, resultsSubheaderText);
             
         }
         // WE'LL LET THE ERROR HANDLER TAKE CARE OF ANY ERRORS,
@@ -297,6 +303,5 @@ public class JottoDocumentManager
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }           
- 
     }
 }   

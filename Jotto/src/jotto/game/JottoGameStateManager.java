@@ -334,36 +334,46 @@ public class JottoGameStateManager
     {
         // ITERATE THROUGH ALL THE COMPLETED GAMES
         Iterator<JottoGameData> it = gamesHistory.iterator();
+         
+        JottoGameData game; // CURRENT GAME WE ARE LOOKING AT
+        long shortestTime; // SHORTEST TIME GAME
+        JottoGameData fastestGame; // THE FASTEST GAME PLAYED
         
-        JottoGameData game = it.next();
-        long shortestTime = game.getTimeOfGame();
-        JottoGameData fastestGame = game;
+        game = it.next();
+        shortestTime = game.getTimeOfGame();
+        fastestGame = game;
         
-        while(it.hasNext())
-        {
-            // GET THE NEXT GAME IN THE SEQUENCE
-            game = it.next();
-
-            if (game.getTimeOfGame() < shortestTime)
+        while(it.hasNext() && it.next().isWordFound()) // ONLY ITERATES THROUGH GAMES THAT HAVE BEEN WON
             {
-                shortestTime = game.getTimeOfGame();
-                fastestGame = game;
+ 
+            game = it.next();
+            if (game.getTimeOfGame() < shortestTime)  
+                 {
+                     shortestTime = game.getTimeOfGame();
+                     fastestGame = game;
+                 }
             }
-        }
         
-        return fastestGame.toString();
-        
+        String nothing = "";
+        if(fastestGame.isWordFound())
+            return fastestGame.toString();
+        else
+            return nothing;
     }
     
     public String getFewestGuesses()
     {
         // ITERATE THROUGH ALL THE COMPLETED GAMES
         Iterator<JottoGameData> it = gamesHistory.iterator();
-        JottoGameData game = it.next();
-        int leastGuesses = game.getNumGuesses();
-        JottoGameData fewestGuesses = game;
+        JottoGameData game; // CURRENT GAME WE'RE LOOKING AT
+        int leastGuesses; // LEAST NUMBER OF GUESSES
+        JottoGameData fewestGuesses; // GAME WITH THE FEWEST GUESSES
+       
+        game = it.next();
+        leastGuesses = game.getNumGuesses();
+        fewestGuesses = game;
         
-        while(it.hasNext())
+        while(it.hasNext() && it.next().isWordFound()) // ONLY ITERATES THROUGH WON GAMES
         {
             // GET THE NEXT GAME IN THE SEQUENCE
             game = it.next();
@@ -374,9 +384,27 @@ public class JottoGameStateManager
                 fewestGuesses = game;
             }
         }
+        String nothing = "";
         
-        return fewestGuesses.toString();
+        if(fewestGuesses.isWordFound())   
+            return fewestGuesses.toString();
+        else
+            return nothing;
         
+    }
+    
+    public String getGameResults()
+    {
+        String htmlText = "";
+        Iterator<JottoGameData> it = gamesHistory.iterator();
+        
+        while(it.hasNext())
+        {
+            it.next();
+            htmlText += it.next().toString();
+        }
+        
+        return htmlText;
     }
 
 }
