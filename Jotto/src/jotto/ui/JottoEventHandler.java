@@ -124,9 +124,9 @@ public class JottoEventHandler
 
         if(b != null)
         buttonText = b.getText();
-           
-        // TOGGLE GUESSES' BACKGROUND COLOR
-        ui.getDocManager().updateGuesses(buttonText.charAt(0));
+        
+        String bgColor = "white"; // BY DEFAULT
+
         
         // GET THE BUTTON THAT WAS PRESSED
         JButton letterButton = (JButton)source;
@@ -137,17 +137,22 @@ public class JottoEventHandler
         {
             letterButton.setBackground(Color.GREEN);
             letterButton.setForeground(Color.BLUE);
-            
+            bgColor = "green";
+            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
         }
         else if (currentBackgroundColor == Color.GREEN)
         {
             letterButton.setBackground(Color.RED);
             letterButton.setForeground(Color.WHITE);
+            bgColor = "red";
+            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
         }
         else
         {
             letterButton.setBackground(Color.LIGHT_GRAY);
             letterButton.setForeground(Color.BLACK);
+            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
+            
         }      
     }
 
