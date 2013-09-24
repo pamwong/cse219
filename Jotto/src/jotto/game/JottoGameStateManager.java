@@ -392,19 +392,4 @@ public class JottoGameStateManager
             return nothing;
         
     }
-    
-    public String getGameResults()
-    {
-        String htmlText = "";
-        Iterator<JottoGameData> it = gamesHistory.iterator();
-        
-        while(it.hasNext())
-        {
-            it.next();
-            htmlText += it.next().toString();
-        }
-        
-        return htmlText;
-    }
-
 }

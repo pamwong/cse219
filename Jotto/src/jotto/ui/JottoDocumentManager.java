@@ -254,6 +254,12 @@ public class JottoDocumentManager
             Element gameResults = statsDoc.getElement(GAME_RESULTS_HEADER_ID);
             statsDoc.setInnerHTML(gameResults, resultsSubheaderText);
             
+            Element resultsList = statsDoc.getElement(GAME_RESULTS_LIST_ID);
+            String htmlText = buildResultsList();
+            statsDoc.insertBeforeEnd(resultsList, htmlText);
+            
+            
+            
         }
         // WE'LL LET THE ERROR HANDLER TAKE CARE OF ANY ERRORS,
         // WHICH COULD HAPPEN IF XML SETUP FILES ARE IMPROPERLY
@@ -303,5 +309,23 @@ public class JottoDocumentManager
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }           
+    }
+    
+    
+    private String buildResultsList()
+    {
+        // ITERATE THROUGH COMPLETED GAMES
+        Iterator<JottoGameData> it = ui.getGSM().getGamesHistoryIterator();
+
+        String htmlText = "<OL>";
+        
+        while(it.hasNext())
+        {
+            JottoGameData game = it.next();
+            htmlText += "<LI>" + game.toString() + "</LI>";
+        }        
+        
+        // RETURN THE COMPLETED HTML
+        return htmlText;
     }
 }   
