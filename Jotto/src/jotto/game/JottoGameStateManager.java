@@ -290,6 +290,8 @@ public class JottoGameStateManager
             // EXCEPTION TYPE
             throw new DuplicateGuessException(guess);
         }
+        
+        gameInProgress.addGuessToList(guess);
         // RECORD THE GUESS
         gameInProgress.guess(guess);
         
@@ -298,6 +300,9 @@ public class JottoGameStateManager
         {
             // CHANGE THE GAME STATE
             currentGameState = JottoGameState.GAME_OVER;
+            
+            // SET END TIME
+            gameInProgress.giveUp();
             
             // PRINT "YOU WIN"
             ui.getDocManager().addWinText();

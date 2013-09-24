@@ -205,4 +205,9 @@ public class JottoGameData
         }
         return text;
     }
+    
+    public void addGuessToList(String guess)
+    {
+        guesses.add(guess);
+    }
 }
