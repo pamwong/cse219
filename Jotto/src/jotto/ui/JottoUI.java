@@ -38,6 +38,7 @@ import properties_manager.PropertiesManager;
  * all presentation and interactions of the Jotto game.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoUI
 {   
@@ -101,6 +102,8 @@ public class JottoUI
     private JPanel helpPanel;
     private JScrollPane helpScrollPane;
     private JEditorPane helpPane; 
+    private JPanel homePanel;
+    private JButton homeButton;
     
     // THIS CLASS WILL HANDLE ALL ACTION EVENTS FOR THIS PROGRAM
     private JottoEventHandler eventHandler;
@@ -617,6 +620,19 @@ public class JottoUI
     private void initHelpPane()
     {
         // WE'LL DISPLAY ALL HELP INFORMATION USING HTML
+        homePanel = new JPanel();
+        homePanel.setBackground(Color.white);
+        homeButton = initToolbarButton(homePanel, JottoPropertyType.HOME_IMG_NAME);
+        
+        // CONNECT THE BUTTON TO THE EVENT HANDLER
+            homeButton.addActionListener(new ActionListener()
+            {   @Override
+                public void actionPerformed(ActionEvent ae)
+                {
+                    eventHandler.respondToHomeButton();
+                }
+            });
+        
         helpPane = new JEditorPane();
         helpPane.setEditable(false);
         helpScrollPane = new JScrollPane(helpPane);
@@ -628,6 +644,9 @@ public class JottoUI
         helpPanel = new JPanel();
         helpPanel.setLayout(new BorderLayout());
         helpPanel.add(helpScrollPane, BorderLayout.CENTER);
+        helpPanel.add(homePanel, BorderLayout.NORTH);
+        
+        
         
         // LOAD THE HELP PAGE
         loadPage(helpPane, JottoPropertyType.HELP_FILE_NAME);
@@ -637,6 +656,7 @@ public class JottoUI
         helpPane.addHyperlinkListener(hhl);        
         
         // ADD IT TO THE WORKSPACE
+        
         workspace.add(helpPanel, JottoUIState.VIEW_HELP_STATE.toString());
     }        
     
