@@ -190,8 +190,10 @@ public class JottoGameData
         if (seconds < 10)   secondsText = "0" + secondsText;
         text += " (" + hours + ":" + minutesText + ":" + secondsText + ") - ";
         
+        
         // THEN ADD THE GUESSES
         Iterator<String> guessIt = guesses.iterator();
+        
         int counter = 0;
         while(guessIt.hasNext())
         {
@@ -203,6 +205,8 @@ public class JottoGameData
             else                text += ", " + guess;
             counter++;
         }
+        
+        
         return text;
     }
     
@@ -210,4 +214,5 @@ public class JottoGameData
     {
         guesses.add(guess);
     }
+    
 }

@@ -326,15 +326,15 @@ public class JottoGameStateManager
     }
     
       /**
-     * Counts and returns the number of wins during this game session.
+     * Gets the game that was won in the shortest time
      * 
-     * @return The number of games in that have been completed that
-     * the player won.
+     * @return the game won fastest
      */
     public String getFastestWin()
     {
         // ITERATE THROUGH ALL THE COMPLETED GAMES
         Iterator<JottoGameData> it = gamesHistory.iterator();
+        
         JottoGameData game = it.next();
         long shortestTime = game.getTimeOfGame();
         JottoGameData fastestGame = game;
@@ -351,8 +351,31 @@ public class JottoGameStateManager
             }
         }
         
+        return fastestGame.toString();
         
-        return game.toString();
+    }
+    
+    public String getFewestGuesses()
+    {
+        // ITERATE THROUGH ALL THE COMPLETED GAMES
+        Iterator<JottoGameData> it = gamesHistory.iterator();
+        JottoGameData game = it.next();
+        int leastGuesses = game.getNumGuesses();
+        JottoGameData fewestGuesses = game;
+        
+        while(it.hasNext())
+        {
+            // GET THE NEXT GAME IN THE SEQUENCE
+            game = it.next();
+
+            if (game.getNumGuesses() < leastGuesses)
+            {
+                leastGuesses = game.getNumGuesses();
+                fewestGuesses = game;
+            }
+        }
+        
+        return fewestGuesses.toString();
         
     }
 

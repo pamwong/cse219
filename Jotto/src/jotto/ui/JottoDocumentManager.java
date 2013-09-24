@@ -226,6 +226,7 @@ public class JottoDocumentManager
         JottoGameStateManager gsm = ui.getGSM();
         int gamesPlayed = gsm.getGamesPlayed();
         int wins = gsm.getWins();
+        String fewWin = gsm.getFewestGuesses();
         String fastWin = gsm.getFastestWin();
         
         try
@@ -241,7 +242,7 @@ public class JottoDocumentManager
             statsDoc.setInnerHTML(lossesElement, EMPTY_TEXT + (gamesPlayed-wins));
             
             Element fewestWin = statsDoc.getElement(FEWEST_GUESSES_ID);
-            statsDoc.setInnerHTML(fewestWin, EMPTY_TEXT);
+            statsDoc.setInnerHTML(fewestWin, EMPTY_TEXT + fewWin);
             
             Element fastestWin = statsDoc.getElement(FASTEST_WIN_ID);
             statsDoc.setInnerHTML(fastestWin, EMPTY_TEXT + fastWin);
