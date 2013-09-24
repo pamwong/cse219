@@ -163,15 +163,43 @@ public class JottoDocumentManager
         // AS ITS ID. THIS IS OK SINCE WE DON'T ALLOW
         // DUPLICATE GUESSES
         String htmlText = START_TAG + HTML.Tag.LI + SPACE + HTML.Attribute.ID + EQUAL + QUOTE + guess + QUOTE + END_TAG;
-
+        String color = "white";
+        String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
+        
+        /*** THIS SHOULD PROBABLY BE A METHOD, TO BE HONEST
+         * 
+         */
+        for(int i = 0; i < guess.length(); i++)
+        {
+                    Character ch = guess.charAt(i); // CHARACTER AT POSITION i
+                    ch = Character.toUpperCase(ch); // TO UPPERCASE
+                    Color c = ui.getColorForChar(ch); // GET THE COLOR FOR THIS CHARACTER
+                    
+        if(c.equals(Color.RED))
+            {
+                color = "red";
+                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
+            }
+                    
+        if(c.equals(Color.GREEN))
+         {
+                color = "green";
+                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG; 
+         }
+                    
+        if(c.equals(Color.LIGHT_GRAY))
+         {
+                        color = "white";
+                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+         }
+                        htmlText += bgColor + guess.charAt(i) + "</font>";
+        }
         // HERE WE'RE PUTTING THE GUESS IN THE LIST ITEM
-        htmlText += guess;
+
        
         // NOW ADD INFORMATION ABOUT THE NUMBER OF LETTERS IN THE
         // GUESS THAT ARE IN THE SECRET WORD
-        htmlText +=   SPACE + OPEN_PAREN
-                +   lettersInGuess
-                +   CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
+        htmlText +=   SPACE + OPEN_PAREN + lettersInGuess + CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
         
         // RETURN THE COMPLETED HTML
         return htmlText;
@@ -290,19 +318,61 @@ public class JottoDocumentManager
     }
     
     /*****
+     * Sets the color of the guesses
      * 
      * @param letter letter to be highlighted
      */
-    public void updateGuesses(char letter)
+    public void updateGuesses()
     {   
         try
-        {
-            String color = "red";
-            String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
-            String test = "<font style=background-color:red>HELLO</font>";
-            Element e = gameDoc.getElement(GUESSES_LIST_ID);
-            System.out.println(e.toString());
-            gameDoc.insertBeforeStart(e, test);
+        {  
+            // GET GUESSES ITERATOR
+            Iterator<String> it = ui.getGSM().getGameInProgress().guessesIterator();
+            String guess;
+            String htmlText = "";
+            int lettersInGuess;
+            
+            while(it.hasNext())
+            {
+                 guess = it.next();
+                 String color = "white";
+                 htmlText += START_TAG + HTML.Tag.LI + SPACE + HTML.Attribute.ID + EQUAL + QUOTE + guess + QUOTE + END_TAG;
+                 String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+                 
+                 for(int i = 0; i < guess.length(); i++)
+                 {
+                    Character ch = guess.charAt(i); // CHARACTER AT POSITION i
+                    ch = Character.toUpperCase(ch); // TO UPPERCASE
+                    Color c = ui.getColorForChar(ch); // GET THE COLOR FOR THIS CHARACTER
+                    
+                    if(c.equals(Color.RED))
+                    {
+                        color = "red";
+                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
+                    }
+                    
+                    if(c.equals(Color.GREEN))
+                    {
+                        color = "green";
+                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG; 
+                    }
+                    
+                    if(c.equals(Color.LIGHT_GRAY))
+                    {
+                        color = "white";
+                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+                    }
+                        htmlText += bgColor + guess.charAt(i) + "</font>";
+                 }
+                 
+                 lettersInGuess = ui.getGSM().getGameInProgress().calcLettersInGuess(guess);
+                 htmlText +=  SPACE + OPEN_PAREN + lettersInGuess +  CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
+            }
+         
+         System.out.println(htmlText);
+         Element e = gameDoc.getElement(GUESSES_LIST_ID);
+         gameDoc.setInnerHTML(e, htmlText);
+            
         }
         catch (BadLocationException | IOException ex)
         {
@@ -310,6 +380,7 @@ public class JottoDocumentManager
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }           
     }
+    
     
     
     private String buildResultsList()
@@ -327,5 +398,10 @@ public class JottoDocumentManager
         
         // RETURN THE COMPLETED HTML
         return htmlText;
+    }
+    
+    private String changeGuessColor(String guess)
+    {
+        
     }
 }   
