@@ -20,7 +20,7 @@ import properties_manager.PropertiesManager;
  * that we maintain both of these pages inside Documents, which store
  * trees containing all the HTML. We will make use of HTML.Tag constants
  * to update these DOMs (Document Object Models).
- * 
+ *
  * @author Richard McKenna
  */
 public class JottoDocumentManager
@@ -28,7 +28,7 @@ public class JottoDocumentManager
     // THE JOTTO GAME'S UI HAS ACCESS TO ALL COMPONENTS, SO
     // IT'S USEFUL TO HAVE IT WHEN WE NEED IT
     private JottoUI ui;
-    
+
     // THESE ARE THE DOCUMENTS WE'LL BE UPDATING HERE
     private HTMLDocument gameDoc;
     private HTMLDocument statsDoc;
@@ -47,7 +47,7 @@ public class JottoDocumentManager
     private final String EQUAL =        "=";
     private final String HASH =         "#";
 
-    // THESE ARE IDs IN THE GAME DISPLAY HTML FILE SO THAT WE 
+    // THESE ARE IDs IN THE GAME DISPLAY HTML FILE SO THAT WE
     // CAN GRAB THE NECESSARY ELEMENTS AND UPDATE THEM
     private final String GUESSES_SUBHEADER_ID   = "guesses_subheader";
     private final String GUESSES_LIST_ID        = "guesses_list";
@@ -62,14 +62,14 @@ public class JottoDocumentManager
     private final String FASTEST_WIN_ID         = "fastest_win";
     private final String GAME_RESULTS_HEADER_ID = "game_results_header";
     private final String GAME_RESULTS_LIST_ID   = "game_results_list";
-        
+
     /**
      * This constructor just keeps the UI for later. Note
      * that once constructed, the docs will need to be set
      * before this class can be used.
-     * 
-     * @param initUI 
-     */    
+     *
+     * @param initUI
+     */
     public JottoDocumentManager(JottoUI initUI)
     {
         // KEEP THE UI FOR LATER
@@ -80,26 +80,26 @@ public class JottoDocumentManager
      * Accessor method for initializing the game doc, which displays while
      * the game is being played and displays the guesses. Note that this
      * must be done before this object can be used.
-     * 
+     *
      * @param initGameDoc The game document to be displayed while the
      * game is being played.
      */
-    public void setGameDoc(HTMLDocument initGameDoc)    
-    { 
-        gameDoc = initGameDoc;    
+    public void setGameDoc(HTMLDocument initGameDoc)
+    {
+        gameDoc = initGameDoc;
     }
-    
+
     /**
      * Accessor method for initializing the stats doc, which displays past
      * game results and statistics. Note that this must be done before this
      * object can be used.
-     * 
+     *
      * @param initStatsDoc The stats document to be displayed on the
      * stats screen.
      */
-    public void setStatsDoc(HTMLDocument initStatsDoc)  
+    public void setStatsDoc(HTMLDocument initStatsDoc)
     {
-        statsDoc = initStatsDoc;  
+        statsDoc = initStatsDoc;
     }
 
     // BELOW ARE FOUR METHODS THAT ARE USED TO INITIALIZE AND
@@ -108,12 +108,12 @@ public class JottoDocumentManager
     // -buildGuessHTML
     // -clearGamePage
     // -updateGuessColors
-    
+
     /**
      * This method lets us add a guess to the game page display without
      * having to rebuild the entire page. We just add it to the HTML list
      * of guesses made so far this game.
-     * 
+     *
      * @param guess Guess to be added to the display.
      */
     public void addGuessToGamePage(String guess)
@@ -127,8 +127,8 @@ public class JottoDocumentManager
             String guessesSubheaderText = props.getProperty(JottoPropertyType.GAME_SUBHEADER_TEXT);
             Element h2 = gameDoc.getElement(GUESSES_SUBHEADER_ID);
             gameDoc.setInnerHTML(h2, guessesSubheaderText);
-            
-            // AND NOW FILL IN THE LIST. WE'RE GOING TO ADD 
+
+            // AND NOW FILL IN THE LIST. WE'RE GOING TO ADD
             // LIST ITEMS TO THE ORDERED LIST
             Element ol = gameDoc.getElement(GUESSES_LIST_ID);
             int lettersInGuess = gameInProgress.calcLettersInGuess(guess);
@@ -144,63 +144,35 @@ public class JottoDocumentManager
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }
     }
-    
+
     /**
      * This private helper method builds the HTML associated with a guess
      * as a list item, adding the proper colors as currently set by the
      * player.
-     * 
+     *
      * @param guess Guess to add to the list.
-     * 
+     *
      * @param lettersInGuess The number of letters from the guess in the
      * secret word. We'll list this in parentheses after each guess.
-     * 
-     * @return 
+     *
+     * @return
      */
     private String buildGuessHTML(String guess, int lettersInGuess)
     {
         // FIRST THE OPENING LIST ITEM TAG WITH THE GUESS
         // AS ITS ID. THIS IS OK SINCE WE DON'T ALLOW
         // DUPLICATE GUESSES
-        String htmlText = START_TAG + HTML.Tag.LI + SPACE + HTML.Attribute.ID + EQUAL + QUOTE + guess + QUOTE + END_TAG;
-        String color = "white";
-        String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
+        String htmlText = "";
+ 
         
-        /*** THIS SHOULD PROBABLY BE A METHOD, TO BE HONEST
-         * 
-         */
-        for(int i = 0; i < guess.length(); i++)
-        {
-                    Character ch = guess.charAt(i); // CHARACTER AT POSITION i
-                    ch = Character.toUpperCase(ch); // TO UPPERCASE
-                    Color c = ui.getColorForChar(ch); // GET THE COLOR FOR THIS CHARACTER
-                    
-        if(c.equals(Color.RED))
-            {
-                color = "red";
-                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
-            }
-                    
-        if(c.equals(Color.GREEN))
-         {
-                color = "green";
-                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG; 
-         }
-                    
-        if(c.equals(Color.LIGHT_GRAY))
-         {
-                        color = "white";
-                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
-         }
-                        htmlText += bgColor + guess.charAt(i) + "</font>";
-        }
+        htmlText += updateGuessColors(guess);
         // HERE WE'RE PUTTING THE GUESS IN THE LIST ITEM
 
-       
+
         // NOW ADD INFORMATION ABOUT THE NUMBER OF LETTERS IN THE
         // GUESS THAT ARE IN THE SECRET WORD
-        htmlText +=   SPACE + OPEN_PAREN + lettersInGuess + CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
-        
+        htmlText += SPACE + OPEN_PAREN + lettersInGuess + CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
+
         // RETURN THE COMPLETED HTML
         return htmlText;
     }
@@ -229,7 +201,7 @@ public class JottoDocumentManager
             // CLEAR THE WIN DISPLAY
             Element winH2 = gameDoc.getElement(WIN_DISPLAY_ID);
             gameDoc.setInnerHTML(winH2, lineBreak);
-        } 
+        }
         // THE ERROR HANDLER WILL DEAL WITH ERRORS ASSOCIATED WITH BUILDING
         // THE HTML FOR THE PAGE, WHICH WOULD LIKELY BE DUE TO BAD DATA FROM
         // AN XML SETUP FILE
@@ -237,14 +209,14 @@ public class JottoDocumentManager
         {
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
-        }        
+        }
     }
-    
+
     /**
      * This method adds the data from the completedGame argument
      * to the stats page, as well as loading all the newly computed
      * stats for all the games played.
-     * 
+     *
      * @param completedGame Game whose summary will be added to
      * the stats page.
      */
@@ -253,13 +225,13 @@ public class JottoDocumentManager
         // GET THE GAME STATS
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         JottoGameStateManager gsm = ui.getGSM();
-        
-        
+
+
         int gamesPlayed = gsm.getGamesPlayed();
         int wins = gsm.getWins();
         String fewWin = gsm.getFewestGuesses();
         String fastWin = gsm.getFastestWin();
-        
+
         try
         {
             // USE THE STATS TO UPDATE THE TABLE AT THE TOP OF THE PAGE
@@ -268,26 +240,26 @@ public class JottoDocumentManager
 
             Element winsElement = statsDoc.getElement(WINS_ID);
             statsDoc.setInnerHTML(winsElement, EMPTY_TEXT + wins);
-            
+
             Element lossesElement = statsDoc.getElement(LOSSES_ID);
             statsDoc.setInnerHTML(lossesElement, EMPTY_TEXT + (gamesPlayed-wins));
-            
+
             Element fewestWin = statsDoc.getElement(FEWEST_GUESSES_ID);
             statsDoc.setInnerHTML(fewestWin, EMPTY_TEXT + fewWin);
-            
+
             Element fastestWin = statsDoc.getElement(FASTEST_WIN_ID);
             statsDoc.setInnerHTML(fastestWin, EMPTY_TEXT + fastWin);
-            
+
             String resultsSubheaderText = props.getProperty(JottoPropertyType.GAME_RESULTS_TEXT);
             Element gameResults = statsDoc.getElement(GAME_RESULTS_HEADER_ID);
             statsDoc.setInnerHTML(gameResults, resultsSubheaderText);
-            
+
             Element resultsList = statsDoc.getElement(GAME_RESULTS_LIST_ID);
             String htmlText = buildResultsList();
             statsDoc.setInnerHTML(resultsList, htmlText);
-            
-            
-            
+
+
+
         }
         // WE'LL LET THE ERROR HANDLER TAKE CARE OF ANY ERRORS,
         // WHICH COULD HAPPEN IF XML SETUP FILES ARE IMPROPERLY
@@ -298,7 +270,7 @@ public class JottoDocumentManager
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
         }
     }
-    
+
     /**
      * This method displays the "You Win!"
      */
@@ -314,94 +286,103 @@ public class JottoDocumentManager
         {
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
-        }           
+        }
     }
-    
+
     /*****
-     * Sets the color of the guesses
-     * 
+     * Sets the color of the guesses when somebody toggles a letter in the UI
+     *
      * @param letter letter to be highlighted
      */
     public void updateGuesses()
-    {   
+    {
         try
-        {  
+        {
             // GET GUESSES ITERATOR
             Iterator<String> it = ui.getGSM().getGameInProgress().guessesIterator();
             String guess;
             String htmlText = "";
             int lettersInGuess;
-            
+
             while(it.hasNext())
             {
                  guess = it.next();
-                 String color = "white";
-                 htmlText += START_TAG + HTML.Tag.LI + SPACE + HTML.Attribute.ID + EQUAL + QUOTE + guess + QUOTE + END_TAG;
-                 String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
                  
-                 for(int i = 0; i < guess.length(); i++)
-                 {
-                    Character ch = guess.charAt(i); // CHARACTER AT POSITION i
-                    ch = Character.toUpperCase(ch); // TO UPPERCASE
-                    Color c = ui.getColorForChar(ch); // GET THE COLOR FOR THIS CHARACTER
-                    
-                    if(c.equals(Color.RED))
-                    {
-                        color = "red";
-                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;   
-                    }
-                    
-                    if(c.equals(Color.GREEN))
-                    {
-                        color = "green";
-                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG; 
-                    }
-                    
-                    if(c.equals(Color.LIGHT_GRAY))
-                    {
-                        color = "white";
-                        bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
-                    }
-                        htmlText += bgColor + guess.charAt(i) + "</font>";
-                 }
+                 htmlText += updateGuessColors(guess);
                  
+
                  lettersInGuess = ui.getGSM().getGameInProgress().calcLettersInGuess(guess);
                  htmlText +=  SPACE + OPEN_PAREN + lettersInGuess +  CLOSE_PAREN + START_TAG + SLASH + HTML.Tag.LI + END_TAG + NL;
             }
-         
-         System.out.println(htmlText);
+
          Element e = gameDoc.getElement(GUESSES_LIST_ID);
          gameDoc.setInnerHTML(e, htmlText);
-            
+
         }
         catch (BadLocationException | IOException ex)
         {
             JottoErrorHandler errorHandler = ui.getErrorHandler();
             errorHandler.processError(JottoPropertyType.INVALID_DOC_ERROR_TEXT);
-        }           
+        }
     }
-    
-    
-    
+
+
+
+    /**************
+     * Builds the results list to display
+     * @return 
+     */
     private String buildResultsList()
     {
         // ITERATE THROUGH COMPLETED GAMES
         Iterator<JottoGameData> it = ui.getGSM().getGamesHistoryIterator();
 
         String htmlText = "<OL>";
-        
+
         while(it.hasNext())
         {
             JottoGameData game = it.next();
             htmlText += "<LI>" + game.toString() + "</LI>";
-        }        
-        
+        }
+
         // RETURN THE COMPLETED HTML
         return htmlText;
     }
-    
-    private String changeGuessColor(String guess)
+
+    /*****************
+     * Method that takes in a guess and returns it with the proper colors
+     * @param guess
+     * @return 
+     */
+    private String updateGuessColors(String guess)
     {
+        String htmlText = "";
+        String color = "white";
+        htmlText += START_TAG + HTML.Tag.LI + SPACE + HTML.Attribute.ID + EQUAL + QUOTE + guess + QUOTE + END_TAG;
+        String bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
         
+        for (int i = 0; i < guess.length(); i++) {
+            Character ch = guess.charAt(i); // CHARACTER AT POSITION i
+            ch = Character.toUpperCase(ch); // TO UPPERCASE
+            Color c = ui.getColorForChar(ch); // GET THE COLOR FOR THIS CHARACTER
+
+            if (c.equals(Color.RED)) {
+                color = "red";
+                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+            }
+
+            if (c.equals(Color.GREEN)) {
+                color = "green";
+                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+            }
+
+            if (c.equals(Color.LIGHT_GRAY)) {
+                color = "white";
+                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+            }
+            htmlText += bgColor + guess.charAt(i) + "</font>";
+        }
+        
+        return htmlText;
     }
-}   
+}

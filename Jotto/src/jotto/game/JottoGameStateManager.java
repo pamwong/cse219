@@ -281,7 +281,7 @@ public class JottoGameStateManager
      * @throws DuplicateGuessException Thrown for the case when
      * the guess has already been made this game.
      */
-    public void processGuess(String guess) throws DuplicateGuessException
+    public void processGuess(String guess) throws DuplicateGuessException, NotInDictionaryException
     {
         // IF THIS GUESS HAS ALREADY BEEN MADE
         if (gameInProgress.guesses.contains(guess))
@@ -291,10 +291,16 @@ public class JottoGameStateManager
             throw new DuplicateGuessException(guess);
         }
         
-        gameInProgress.addGuessToList(guess);
-        // RECORD THE GUESS
-        gameInProgress.guess(guess);
+        if(!isInDictionary(guess))
+        {
+            throw new NotInDictionaryException(guess);
+        }
+
+            gameInProgress.addGuessToList(guess);
+            // RECORD THE GUESS
+            gameInProgress.guess(guess);
         
+
         // IS IT THE WORD?
         if (gameInProgress.isWordFound())
         {
@@ -306,10 +312,6 @@ public class JottoGameStateManager
             
             // PRINT "YOU WIN"
             ui.getDocManager().addWinText();
-            
-            /****
-             * add functionality such that user cannot enter more guesses
-             */
             
             // ADD THE COMPLETED GAME TO THE HISTORY
             gamesHistory.add(gameInProgress);

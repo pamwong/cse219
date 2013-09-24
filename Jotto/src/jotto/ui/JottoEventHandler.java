@@ -11,6 +11,7 @@ import jotto.Jotto.JottoPropertyType;
 import jotto.file.JottoFileLoader;
 import jotto.game.DuplicateGuessException;
 import jotto.game.JottoGameStateManager;
+import jotto.game.NotInDictionaryException;
 import xml_utilities.InvalidXMLFileFormatException;
 import properties_manager.PropertiesManager;
 
@@ -125,9 +126,8 @@ public class JottoEventHandler
         if(b != null)
         buttonText = b.getText();
         
-        String bgColor = "white"; // BY DEFAULT
-
         
+
         // GET THE BUTTON THAT WAS PRESSED
         JButton letterButton = (JButton)source;
         
@@ -137,23 +137,19 @@ public class JottoEventHandler
         {
             letterButton.setBackground(Color.GREEN);
             letterButton.setForeground(Color.BLUE);
-            bgColor = "green";
-            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
         }
         else if (currentBackgroundColor == Color.GREEN)
         {
             letterButton.setBackground(Color.RED);
             letterButton.setForeground(Color.WHITE);
-            bgColor = "red";
-            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
         }
         else
         {
             letterButton.setBackground(Color.LIGHT_GRAY);
             letterButton.setForeground(Color.BLACK);
-            ui.getDocManager().updateGuesses(buttonText.charAt(0), bgColor);
-            
-        }      
+        }
+        
+        ui.getDocManager().updateGuesses();
     }
 
     /**
@@ -176,7 +172,11 @@ public class JottoEventHandler
         catch(DuplicateGuessException dge)
         {
             ui.getErrorHandler().processError(JottoPropertyType.DUPLICATE_WORD_ERROR_TEXT);
-        }        
+        }
+         catch(NotInDictionaryException nid)
+        {
+            ui.getErrorHandler().processError(JottoPropertyType.NOT_IN_DICTIONARY_TEXT);
+        }      
     }
 
     /**
