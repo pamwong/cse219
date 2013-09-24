@@ -276,10 +276,12 @@ public class JottoDocumentManager
      */
     public void addWinText()
     {
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        
         try
         {
             Element win = gameDoc.getElement(WIN_DISPLAY_ID);
-            String htmlText = "You Win!";
+            String htmlText = props.getProperty(JottoPropertyType.WIN_DISPLAY_TEXT);
             gameDoc.insertBeforeEnd(win, htmlText);
         }
         catch (BadLocationException | IOException ex)
@@ -317,6 +319,7 @@ public class JottoDocumentManager
 
          Element e = gameDoc.getElement(GUESSES_LIST_ID);
          gameDoc.setInnerHTML(e, htmlText);
+
 
         }
         catch (BadLocationException | IOException ex)
@@ -368,12 +371,12 @@ public class JottoDocumentManager
 
             if (c.equals(Color.RED)) {
                 color = "red";
-                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+                bgColor = START_TAG + "font style" + EQUAL + QUOTE + "background-color" + COLON + color + "; color: white" + QUOTE + END_TAG;
             }
 
             if (c.equals(Color.GREEN)) {
-                color = "green";
-                bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
+                color = "7FFF00";
+                bgColor = START_TAG + "font style" + EQUAL + QUOTE + "background-color" + COLON + color + "; color: blue" + QUOTE + END_TAG;
             }
 
             if (c.equals(Color.LIGHT_GRAY)) {
