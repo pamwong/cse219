@@ -21,6 +21,7 @@ import properties_manager.PropertiesManager;
  * inside this class.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoEventHandler
 {
@@ -167,6 +168,7 @@ public class JottoEventHandler
         // PROCESS THE GUESS
         try
         {
+            if(ui.getGSM().isGameInProgress())
             gsm.processGuess(guess);
         }
         catch(DuplicateGuessException dge)
@@ -217,4 +219,9 @@ public class JottoEventHandler
             System.exit(0);
         }
     }    
+    
+    public void respondToHomeButton()
+    {
+        ui.loadPage(ui.getHelpPane(), JottoPropertyType.HELP_FILE_NAME);
+    }
 }

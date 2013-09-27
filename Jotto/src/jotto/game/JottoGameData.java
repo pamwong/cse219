@@ -10,6 +10,7 @@ import java.util.Iterator;
  * all instance variables have default (package-level) access.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoGameData
 {

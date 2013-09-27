@@ -12,6 +12,7 @@ import properties_manager.PropertiesManager;
  * input.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoErrorHandler
 {

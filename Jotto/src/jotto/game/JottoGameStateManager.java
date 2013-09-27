@@ -10,6 +10,7 @@ import jotto.ui.JottoUI;
  * so completely independent of the presentation of the game.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoGameStateManager
 {

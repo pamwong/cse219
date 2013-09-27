@@ -12,6 +12,7 @@ import properties_manager.PropertiesManager;
  * letters, but guess words may.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class Jotto
 {

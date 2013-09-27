@@ -42,7 +42,7 @@
         <property name="INVALID_DOC_ERROR_TEXT"             value="Eraro renkontis redaktas malnovan HTML-Dokumenton"></property>
         <property name="INVALID_XML_FILE_ERROR_TEXT"        value="Nevalida XML propraĵoj dosieron"></property>
         <property name="INVALID_GUESS_LENGTH_ERROR_TEXT"    value="Guess devas havi kvin karakteroj"></property>
-        <property name="WORD_NOT_IN_DICTIONARY_ERROR_TEXT"  value="Supozas ke ne estas trovita en la vortaro"></property>
+        <property name="NOT_IN_DICTIONARY_TEXT"  			value="Supozas ke ne estas trovita en la vortaro"></property>
         <property name="INVALID_DICTIONARY_ERROR_TEXT"      value="Okazis eraro ŝarĝante la vortaro"></property>
     </property_list>    
     

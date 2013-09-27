@@ -20,6 +20,7 @@ import properties_manager.PropertiesManager;
  * functions, this class has no instance or static variables.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoFileLoader
 {

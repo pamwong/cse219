@@ -1,4 +1,4 @@
-package jotto.ui;
+    package jotto.ui;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -22,6 +22,7 @@ import properties_manager.PropertiesManager;
  * to update these DOMs (Document Object Models).
  *
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class JottoDocumentManager
 {
@@ -163,11 +164,7 @@ public class JottoDocumentManager
         // AS ITS ID. THIS IS OK SINCE WE DON'T ALLOW
         // DUPLICATE GUESSES
         String htmlText = "";
- 
-        
         htmlText += updateGuessColors(guess);
-        // HERE WE'RE PUTTING THE GUESS IN THE LIST ITEM
-
 
         // NOW ADD INFORMATION ABOUT THE NUMBER OF LETTERS IN THE
         // GUESS THAT ARE IN THE SECRET WORD
@@ -380,7 +377,7 @@ public class JottoDocumentManager
             }
 
             if (c.equals(Color.LIGHT_GRAY)) {
-                color = "white";
+                color = "C0C0C0";
                 bgColor = START_TAG + "font style" + EQUAL + "background-color" + COLON + color + END_TAG;
             }
             htmlText += bgColor + guess.charAt(i) + "</font>";

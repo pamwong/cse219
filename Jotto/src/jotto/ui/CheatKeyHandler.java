@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
  * during development.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class CheatKeyHandler extends KeyAdapter
 {

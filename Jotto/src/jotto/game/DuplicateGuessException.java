@@ -9,6 +9,7 @@ import properties_manager.PropertiesManager;
  * a word not in the dictionary.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class DuplicateGuessException extends Exception
 {

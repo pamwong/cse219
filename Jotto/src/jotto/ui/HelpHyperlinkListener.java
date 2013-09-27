@@ -10,6 +10,7 @@ import javax.swing.event.HyperlinkListener;
  * Web browser. When the user clicks on a hyperlink that page is loaded.
  * 
  * @author Richard McKenna
+ * @co-author Pamela Wong
  */
 public class HelpHyperlinkListener implements HyperlinkListener
 {

@@ -19,7 +19,7 @@
         
         <!-- IN-GAME TEXT -->
         <property name="GUESS_LABEL"            value="Adivinar: "></property>
-        <property name="GAME_SUBHEADER_TEXT"    value="Conjeturas (# of letters in secret word)"></property>
+        <property name="GAME_SUBHEADER_TEXT"    value="Conjeturas (cartas de número en palabra secreta)"></property>
         <property name="WIN_DISPLAY_TEXT"       value="Usted gana!"></property>
         <property name="GAME_RESULTS_TEXT"      value="GRESULTADOS DEL JUEGO"></property>
         <property name="EXIT_REQUEST_TEXT"      value="¿Está seguro que desea dejar de fumar?"></property>
@@ -42,6 +42,7 @@
         <property name="INVALID_DOC_ERROR_TEXT"             value="Error con la edición de un documento HTML"></property>
         <property name="INVALID_XML_FILE_ERROR_TEXT"        value="Invalid archivo de propiedades XML"></property>
         <property name="INVALID_DICTIONARY_ERROR_TEXT"      value="Se produjo un error cargando el diccionario"></property>
+		<property name="NOT_IN_DICTIONARY_TEXT"  			value="Esta palabra no existe en el diccionario!"></property>
     </property_list>    
     <property_options_list>
         <property_options name="LETTER_OPTIONS">
@@ -59,6 +60,7 @@
             <option>L</option>
             <option>M</option>
             <option>N</option>
+			<option>Ñ</option>
             <option>O</option>
             <option>P</option>
             <option>Q</option>
