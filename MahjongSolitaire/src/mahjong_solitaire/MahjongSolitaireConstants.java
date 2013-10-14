@@ -33,6 +33,7 @@ public class MahjongSolitaireConstants
     public static final String TILE_STACK_TYPE = "TILE_STACK_TYPE";
     public static final String BACK_BUTTON_TYPE = "BACK_BUTTON_TYPE";
     public static final String UNDO_BUTTON_TYPE = "UNDO_BUTTON_TYPE";
+    public static final String TILE_COUNT_TYPE = "TILE_COUNT_TYPE";
 
     // DIALOG TYPES
     public static final String STATS_DIALOG_TYPE = "STATS_DIALOG_TYPE";
@@ -100,6 +101,8 @@ public class MahjongSolitaireConstants
     public static final int TILE_STACK_OFFSET_X = 30;
     public static final int TILE_STACK_OFFSET_Y = 12;
     public static final int TILE_STACK_2_OFFSET_X = 105;
+    public static final int TILE_COUNT_X = TILE_STACK_X + 190 + CONTROLS_MARGIN;
+    public static final int TILE_COUNT_Y = 0;
        
     // THESE ARE USED FOR FORMATTING THE TIME OF GAME
     public static final long MILLIS_IN_A_SECOND = 1000;
@@ -118,7 +121,7 @@ public class MahjongSolitaireConstants
     public static final Color DEBUG_TEXT_COLOR = Color.BLACK;
     public static final Color TEXT_DISPLAY_COLOR = new Color (10, 160, 10);
     public static final Color SELECTED_TILE_COLOR = new Color(255,255,0,100);
-    public static final Color INCORRECTLY_SELECTED_TILE_COLOR = new Color(255, 50, 50, 100);
+    public static final Color INCORRECTLY_SELECTED_TILE_COLOR = new Color(255, 0, 0, 100);
     public static final Color STATS_COLOR = new Color(0, 60, 0);
 
     // FONTS USED DURING FOR TEXTUAL GAME DISPLAYS
