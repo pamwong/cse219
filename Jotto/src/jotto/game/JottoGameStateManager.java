@@ -339,26 +339,32 @@ public class JottoGameStateManager
         Iterator<JottoGameData> it = gamesHistory.iterator();
          
         JottoGameData game; // CURRENT GAME WE ARE LOOKING AT
-        long shortestTime; // SHORTEST TIME GAME
-        JottoGameData fastestGame; // THE FASTEST GAME PLAYED
+        long shortestTime = 0; // SHORTEST TIME GAME
+        JottoGameData fastestGame = null; // THE FASTEST GAME PLAYED
+        int wins = 0;
         
-        game = it.next();
-        shortestTime = game.getTimeOfGame();
-        fastestGame = game;
-        
-        while(it.hasNext() && it.next().isWordFound()) // ONLY ITERATES THROUGH GAMES THAT HAVE BEEN WON
-            {
- 
+         while(it.hasNext()) // Iterate through won games
+        {
+            // GET THE NEXT GAME IN THE SEQUENCE
             game = it.next();
-            if (game.getTimeOfGame() < shortestTime)  
-                 {
-                     shortestTime = game.getTimeOfGame();
-                     fastestGame = game;
-                 }
+            
+            // IF IT ENDED IN A WIN, INC THE COUNTER
+            if (game.isWordFound()) {
+                wins++;
+                
+                if(wins == 1) // Initializes shortest Time to first won game
+                shortestTime = game.getTimeOfGame();
+                
+            if (game.getTimeOfGame() <= shortestTime)
+            {
+                shortestTime = game.getTimeOfGame();
+                fastestGame = game;
             }
-        
+             
+            }
+        }
         String nothing = "";
-        if(fastestGame.isWordFound())
+        if(fastestGame != null && fastestGame.isWordFound())
             return fastestGame.toString();
         else
             return nothing;
@@ -369,27 +375,33 @@ public class JottoGameStateManager
         // ITERATE THROUGH ALL THE COMPLETED GAMES
         Iterator<JottoGameData> it = gamesHistory.iterator();
         JottoGameData game; // CURRENT GAME WE'RE LOOKING AT
-        int leastGuesses; // LEAST NUMBER OF GUESSES
-        JottoGameData fewestGuesses; // GAME WITH THE FEWEST GUESSES
+        int leastGuesses = 0; // LEAST NUMBER OF GUESSES
+        JottoGameData fewestGuesses = null; // GAME WITH THE FEWEST GUESSES
+        int wins = 0;
        
-        game = it.next();
-        leastGuesses = game.getNumGuesses();
-        fewestGuesses = game;
-        
-        while(it.hasNext() && it.next().isWordFound()) // ONLY ITERATES THROUGH WON GAMES
+          while(it.hasNext())
         {
             // GET THE NEXT GAME IN THE SEQUENCE
             game = it.next();
-
-            if (game.getNumGuesses() < leastGuesses)
+            
+            
+            // IF IT ENDED IN A WIN, INC THE COUNTER
+            if (game.isWordFound()) {
+                wins++;
+                // Initialize least guesses with first won game
+                if(wins == 1)
+                    leastGuesses = game.getNumGuesses();
+            if(game.getNumGuesses() <= leastGuesses)
             {
                 leastGuesses = game.getNumGuesses();
                 fewestGuesses = game;
             }
+             
+            }
         }
         String nothing = "";
         
-        if(fewestGuesses.isWordFound())   
+        if(fewestGuesses != null && fewestGuesses.isWordFound())   
             return fewestGuesses.toString();
         else
             return nothing;
