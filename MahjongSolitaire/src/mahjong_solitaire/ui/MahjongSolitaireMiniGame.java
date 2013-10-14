@@ -1,6 +1,16 @@
 package mahjong_solitaire.ui;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +26,7 @@ import mini_game.Sprite;
 import mini_game.SpriteType;
 import properties_manager.PropertiesManager;
 import mahjong_solitaire.MahjongSolitaire.MahjongSolitairePropertyType;
+import mahjong_solitaire.data.MahjongLevelRecord;
 import mahjong_solitaire.file.MahjongSolitaireFileManager;
 import mahjong_solitaire.data.MahjongSolitaireRecord;
 import mahjong_solitaire.events.BackHandler;
@@ -114,6 +125,9 @@ public class MahjongSolitaireMiniGame extends MiniGame
         // MAKE SURE ONLY THE PROPER DIALOG IS VISIBLE
         guiDialogs.get(WIN_DIALOG_TYPE).setState(INVISIBLE_STATE);
         guiDialogs.get(STATS_DIALOG_TYPE).setState(VISIBLE_STATE);
+        guiDialogs.get(LOSS_DIALOG_TYPE).setState(INVISIBLE_STATE);
+        guiButtons.get(TRY_AGAIN_TYPE).setState(INVISIBLE_STATE);
+
     }
     
     /**
@@ -123,6 +137,24 @@ public class MahjongSolitaireMiniGame extends MiniGame
     {
         // THIS CURRENTLY DOES NOTHING, INSTEAD, IT MUST SAVE ALL THE
         // PLAYER RECORDS IN THE SAME FORMAT IT IS BEING LOADED
+        
+        MahjongSolitaireRecord recordToSave = getPlayerRecord();
+        try {
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        String dataPath = props.getProperty(MahjongSolitairePropertyType.DATA_PATH);
+        String recordPath = dataPath + props.getProperty(MahjongSolitairePropertyType.RECORD_FILE_NAME);
+        File fileToSave = new File(recordPath);
+        byte[] bytes = recordToSave.toByteArray();
+        
+        FileOutputStream fos = new FileOutputStream(fileToSave);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        bos.write(bytes);
+        bos.close();
+        }
+        catch (Exception e) {
+            // STUFF
+        }
+        
     }
     
     /**
@@ -147,6 +179,8 @@ public class MahjongSolitaireMiniGame extends MiniGame
         guiDecor.get(TILE_STACK_TYPE).setState(VISIBLE_STATE);
         guiButtons.get(UNDO_BUTTON_TYPE).setState(VISIBLE_STATE);
         guiButtons.get(UNDO_BUTTON_TYPE).setEnabled(true);
+        guiDecor.get(TILE_COUNT_TYPE).setState(VISIBLE_STATE);
+        
    
         
         // DEACTIVATE THE LEVEL SELECT BUTTONS
@@ -156,7 +190,10 @@ public class MahjongSolitaireMiniGame extends MiniGame
             guiButtons.get(level).setState(INVISIBLE_STATE);
             guiButtons.get(level).setEnabled(false);
         }
-
+        
+        // DISABLE TRY AGAIN BUTTON
+        guiButtons.get(TRY_AGAIN_TYPE).setEnabled(false);
+        
         // MOVE THE TILES TO THE STACK AND MAKE THEM VISIBLE
         ((MahjongSolitaireDataModel)data).enableTiles(true);
         data.reset(this);
@@ -189,6 +226,7 @@ public class MahjongSolitaireMiniGame extends MiniGame
         guiButtons.get(BACK_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(UNDO_BUTTON_TYPE).setState(INVISIBLE_STATE);
         guiButtons.get(UNDO_BUTTON_TYPE).setEnabled(false);
+        guiDecor.get(TILE_COUNT_TYPE).setState(INVISIBLE_STATE);
         
         // ACTIVATE THE LEVEL SELECT BUTTONS
         // DEACTIVATE THE LEVEL SELECT BUTTONS
@@ -203,6 +241,8 @@ public class MahjongSolitaireMiniGame extends MiniGame
         // DEACTIVATE ALL DIALOGS
         guiDialogs.get(WIN_DIALOG_TYPE).setState(INVISIBLE_STATE);
         guiDialogs.get(STATS_DIALOG_TYPE).setState(INVISIBLE_STATE);
+        guiDialogs.get(LOSS_DIALOG_TYPE).setState(INVISIBLE_STATE);
+        guiButtons.get(TRY_AGAIN_TYPE).setState(INVISIBLE_STATE);
 
         // HIDE THE TILES
         ((MahjongSolitaireDataModel)data).enableTiles(false);
@@ -264,6 +304,7 @@ public class MahjongSolitaireMiniGame extends MiniGame
             loadAudioCue(MahjongSolitairePropertyType.WIN_AUDIO_CUE);
             loadAudioCue(MahjongSolitairePropertyType.SPLASH_SCREEN_SONG_CUE);
             loadAudioCue(MahjongSolitairePropertyType.GAMEPLAY_SONG_CUE);
+            loadAudioCue(MahjongSolitairePropertyType.LOSS_AUDIO_CUE);
 
             // PLAY THE WELCOME SCREEN SONG
             audio.play(MahjongSolitairePropertyType.SPLASH_SCREEN_SONG_CUE.toString(), true);
@@ -437,6 +478,14 @@ public class MahjongSolitaireMiniGame extends MiniGame
         sT.addState(VISIBLE_STATE, img);
         s = new Sprite(sT, TILE_STACK_X, TILE_STACK_Y, 0, 0, INVISIBLE_STATE);
         guiDecor.put(TILE_STACK_TYPE, s);
+        
+        // AND THE TILE COUNT
+        String tileCountContainer = props.getProperty(MahjongSolitairePropertyType.TILE_COUNT_IMAGE_NAME);
+        sT = new SpriteType(TILE_COUNT_TYPE);
+        img = loadImage(imgPath + tileCountContainer);
+        sT.addState(VISIBLE_STATE, img);
+        s = new Sprite(sT, TILE_COUNT_X, TILE_COUNT_Y, 0, 0, INVISIBLE_STATE);
+        guiDecor.put(TILE_COUNT_TYPE, s);
 
 
         
@@ -461,6 +510,28 @@ public class MahjongSolitaireMiniGame extends MiniGame
         y = (data.getGameHeight()/2) - (img.getHeight(null)/2);
         s = new Sprite(sT, x, y, 0, 0, INVISIBLE_STATE);
         guiDialogs.put(WIN_DIALOG_TYPE, s);
+        
+        // AND THE LOSS CONDITION DISPLAY
+        String lossDisplay = props.getProperty(MahjongSolitairePropertyType.LOSS_DIALOG_IMAGE_NAME);
+        sT = new SpriteType(LOSS_DIALOG_TYPE);
+        img = loadImageWithColorKey(imgPath + lossDisplay, COLOR_KEY);
+        sT.addState(VISIBLE_STATE, img);
+        x = (data.getGameWidth()/2) - (img.getWidth(null)/2);
+        y = (data.getGameHeight()/2) - (img.getHeight(null)/2);
+        s = new Sprite(sT, x, y, 0, 0, INVISIBLE_STATE);
+        guiDialogs.put(LOSS_DIALOG_TYPE, s);
+                
+        // AND THE TRY AGAIN DISPLAY
+        String tryAgainDisplay = props.getProperty(MahjongSolitairePropertyType.TRY_AGAIN_IMAGE_NAME);
+        sT = new SpriteType(TRY_AGAIN_TYPE);
+        img = loadImageWithColorKey(imgPath + tryAgainDisplay, COLOR_KEY);
+        sT.addState(VISIBLE_STATE, img);
+        img = loadImage(imgPath + tryAgainDisplay);
+        sT.addState(MOUSE_OVER_STATE, img);
+        x = (data.getGameWidth()/2) - (img.getWidth(null)/2);
+        y = (data.getGameHeight()/2) - (img.getHeight(null)/2 - 180);
+        s = new Sprite(sT, x, y, 0, 0, INVISIBLE_STATE);
+        guiButtons.put(TRY_AGAIN_TYPE, s);
 		        
         // THEN THE TILES STACKED TO THE TOP LEFT
         ((MahjongSolitaireDataModel)data).initTiles();
@@ -505,9 +576,13 @@ public class MahjongSolitaireMiniGame extends MiniGame
         UndoHandler uh = new UndoHandler(this);
         guiButtons.get(UNDO_BUTTON_TYPE).setActionListener(uh);
         
+        // TRY AGAIN EVENT HANDLER
+        guiButtons.get(TRY_AGAIN_TYPE).setActionListener(ngh);
+        
         // KEY LISTENER - LET'S US PROVIDE CUSTOM RESPONSES
         MahjongKeyHandler mkh = new MahjongKeyHandler(this);
         this.setKeyListener(mkh);
+        
         
         
     }
