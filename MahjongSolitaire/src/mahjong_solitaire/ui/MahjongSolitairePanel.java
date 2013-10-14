@@ -1,6 +1,7 @@
 package mahjong_solitaire.ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -188,6 +189,7 @@ public class MahjongSolitairePanel extends JPanel
             String time = data.gameTimeToText();
             int x = TIME_X + TIME_OFFSET;
             int y = TIME_Y + TIME_TEXT_OFFSET;
+            g.setFont(new Font("default", Font.BOLD, 40));
             g.drawString(time, x, y);
         }        
     }
