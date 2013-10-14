@@ -48,6 +48,9 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
     // IS TRYING TO MATCH. THERE CAN ONLY BE ONE OF THESE AT ANY TIME
     private MahjongSolitaireTile selectedTile;
     
+    // THIS IS A INCORRECTLY SELECTED TILE, THERE CAN ONLY BE ONE
+    private MahjongSolitaireTile badSelectedTile;
+    
     // THE INITIAL LOCATION OF TILES BEFORE BEING PLACED IN THE GRID
     private int unassignedTilesX;
     private int unassignedTilesY;
@@ -456,6 +459,7 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
                 if (stack1.size() > 0)
                 {
                     // GET THE FIRST TILE
+                    
                     MahjongSolitaireTile testTile1 = stack1.get(stack1.size()-1);
                     for (int k = 0; k < gridColumns; k++)
                     {
@@ -539,10 +543,20 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
         
         // THIS HAS THE APPROXIMATE PATH NODES, WHICH WE'LL SLIGHTLY
         // RANDOMIZE FOR EACH TILE FOLLOWING THE PATH.
+        
+        /**
         winPath.add(getGameWidth() - WIN_PATH_COORD);   winPath.add(WIN_PATH_COORD);
         winPath.add(WIN_PATH_COORD);                    winPath.add(WIN_PATH_COORD);
         winPath.add(WIN_PATH_COORD);                    winPath.add(getGameHeight() - WIN_PATH_COORD);
         winPath.add(getGameWidth() - WIN_PATH_COORD);   winPath.add(getGameHeight() - WIN_PATH_COORD);
+        **/
+        
+        winPath.add(600); winPath.add(75);
+        winPath.add(250); winPath.add(220);
+        winPath.add(400); winPath.add(600);
+        winPath.add(600); winPath.add(getGameHeight() - WIN_PATH_COORD);
+        winPath.add(800); winPath.add(getGameHeight() - WIN_PATH_COORD - 50);
+        winPath.add(920); winPath.add(200);
         
         // START THE ANIMATION FOR ALL THE TILES
         for (int i = 0; i < stackTiles.size(); i++)
@@ -643,6 +657,7 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
         // IF THE TILE IS NOT FREE, DO NOTHING, BUT MAKE SURE WE GIVE FEEDBACK
         if ((col > 0) && (col < (gridColumns - 1)))
         {
+
             int leftZ = tileGrid[col-1][row].size();
             int z = tileGrid[col][row].size();
             int rightZ = tileGrid[col+1][row].size();
@@ -653,6 +668,17 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
                 if (selectTile.getState().equals(INCORRECTLY_SELECTED_STATE))
                 {
                     selectTile.setState(VISIBLE_STATE);
+                    return;
+                }
+                else // HIGHLIGHTS IT RED IF IT'S INCORRECTLY SELECTED
+                {
+                    //THERE IS ALREADY A BAD SELECTED TILE
+                    if(badSelectedTile != null)
+                        badSelectedTile.setState(VISIBLE_STATE);
+                    
+                    badSelectedTile = selectTile;
+                    
+                    selectTile.setState(INCORRECTLY_SELECTED_STATE);
                     return;
                 }
             }
@@ -675,7 +701,6 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
             move.row2 = selectTile.getGridRow();
             
             processMove(move);
-                
         }
         // THEY DON'T MATCH, GIVE SOME AUDIO FEEDBACK
         else miniGame.getAudio().play(MahjongSolitairePropertyType.NO_MATCH_AUDIO_CUE.toString(), false);     
@@ -864,7 +889,10 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
                     movingTiles.add(tile);
                 }
             }
-        }        
+        }   
+        
+        game.getAudio().play(MahjongSolitairePropertyType.GAMEPLAY_SONG_CUE.toString(), true);
+        
         // AND START ALL UPDATES
         beginGame();
         
