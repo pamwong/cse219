@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.swing.JPanel;
+import mahjong_solitaire.MahjongSolitaire;
 import mini_game.MiniGame;
 import mini_game.Sprite;
 import mini_game.SpriteType;
 import mahjong_solitaire.data.MahjongSolitaireDataModel;
 import static mahjong_solitaire.MahjongSolitaireConstants.*;
 import mahjong_solitaire.data.MahjongSolitaireRecord;
+import mahjong_solitaire.file.MahjongSolitaireFileManager;
+import properties_manager.PropertiesManager;
 
 /**
  * This class performs all of the rendering for the Mahjong game application.
@@ -172,6 +175,7 @@ public class MahjongSolitairePanel extends JPanel
         }
     }
 
+    
     /**
      * This method renders the on-screen stats that change as
      * the game progresses. This means things like the game time
@@ -191,7 +195,58 @@ public class MahjongSolitairePanel extends JPanel
             int y = TIME_Y + TIME_TEXT_OFFSET;
             g.setFont(new Font("default", Font.BOLD, 40));
             g.drawString(time, x, y);
-        }        
+        }
+        if (((MahjongSolitaireMiniGame)game).isCurrentScreenState(GAME_SCREEN_STATE) || data.isPaused())
+        {
+            int tilesLeft = NUM_TILES - data.getStackTiles().size();
+            String tileCount = "" + tilesLeft;
+            int x = TILE_COUNT_X + TILE_COUNT_OFFSET;
+            int y = TILE_COUNT_Y + TILE_COUNT_TEXT_OFFSET;
+            g.setFont(new Font("default", Font.BOLD, 40));
+            g.drawString(tileCount, x, y);
+        }
+        
+        if(game.getGUIDialogs().get(STATS_DIALOG_TYPE).getState().equals(VISIBLE_STATE))
+            {
+                PropertiesManager props = PropertiesManager.getPropertiesManager();
+                String imgPath = props.getProperty(MahjongSolitaire.MahjongSolitairePropertyType.IMG_PATH);
+                String level = data.getCurrentLevel().substring(17, data.getCurrentLevel().length() - 4);
+                String statsDialog = props.getProperty(MahjongSolitaire.MahjongSolitairePropertyType.STATS_DIALOG_IMAGE_NAME);
+                BufferedImage img = game.loadImageWithColorKey(imgPath + statsDialog, COLOR_KEY);
+                int x = (data.getGameWidth()/2) - (img.getWidth(null)/2) + 15;
+                int y = (data.getGameHeight()/2) - (img.getHeight(null)/2) + 200;
+                g.setFont(STATS_FONT);
+                g.drawString(level, x, y);
+                
+                level = data.getCurrentLevel();
+                MahjongSolitaireRecord record = ((MahjongSolitaireMiniGame)game).getPlayerRecord();
+                int numGames = record.getGamesPlayed(level);
+                String gamesPlayed = "Games: " + numGames;
+                g.drawString(gamesPlayed, x, y+50);
+             
+                int wins = record.getWins(level);
+                String gamesWon = "Wins: " + wins;
+                g.drawString(gamesWon, x, y+70);
+            
+                int losses = record.getLosses(level);
+                String gamesLost = "Losses: " + losses;
+                g.drawString(gamesLost, x, y+90);
+       
+                double percentage = record.calculateWinPercentage(level);
+                String winPercentage = "Win%: " + percentage;
+                g.drawString(winPercentage, x, y+110);
+                
+                long fastest = record.getFastestTime(level);
+                String fastestWin = "Fastest Win: ";
+                if(fastest != Long.MAX_VALUE)
+                    fastestWin += data.timeToText(fastest);
+                else
+                    fastestWin += "N/A";
+                g.drawString(fastestWin, x, y+130);
+                
+            }
+       
+        
     }
         
     /**
@@ -307,6 +362,7 @@ public class MahjongSolitairePanel extends JPanel
             // RENDER THE DIALOG, NOTE IT WILL ONLY DO IT IF IT'S VISIBLE
             renderSprite(g, s);
         }
+       
     }
     
     /**
