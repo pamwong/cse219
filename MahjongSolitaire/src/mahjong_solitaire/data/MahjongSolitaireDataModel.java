@@ -648,6 +648,7 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
             int rightZ = tileGrid[col+1][row].size();
             if ((z <= leftZ) && (z <= rightZ))
             {
+                
                 // IF IT'S ALREADY INCORRECTLY SELECTED, DEACTIVATE THE FEEDBACK
                 if (selectTile.getState().equals(INCORRECTLY_SELECTED_STATE))
                 {
@@ -664,11 +665,21 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
             selectedTile.setState(SELECTED_STATE);
             miniGame.getAudio().play(MahjongSolitairePropertyType.SELECT_AUDIO_CUE.toString(), false);
         }
-        // THEY DON'T MATCH, GIVE SOME AUDIO FEEDBACK
-        else
+        // THEY MATCH
+        else if(selectedTile != null && selectedTile.match(selectTile))
         {
-            miniGame.getAudio().play(MahjongSolitairePropertyType.NO_MATCH_AUDIO_CUE.toString(), false);   
+            MahjongSolitaireMove move = new MahjongSolitaireMove();
+            move.col1 = selectedTile.getGridColumn();
+            move.row1 = selectedTile.getGridRow();
+            move.col2 = selectTile.getGridColumn();
+            move.row2 = selectTile.getGridRow();
+            
+            processMove(move);
+                
         }
+        // THEY DON'T MATCH, GIVE SOME AUDIO FEEDBACK
+        else miniGame.getAudio().play(MahjongSolitairePropertyType.NO_MATCH_AUDIO_CUE.toString(), false);     
+
     }
     
     /**
