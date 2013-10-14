@@ -51,23 +51,27 @@ public class MahjongKeyHandler extends KeyAdapter
             if (move != null)
                 data.processMove(move);
         }
-
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent ke)
-    {
-        // CHEAT BY ONE MOVE. NOTE THAT IF WE HOLD THE U
-        // KEY DOWN IT WILL CONTINUALLY CHEAT
+        
+        
+        // SHORT FIX FOR NOW
         if (ke.getKeyCode() == KeyEvent.VK_U)
         {
             System.out.println("U key pressed");
             MahjongSolitaireDataModel data = (MahjongSolitaireDataModel)game.getDataModel();
-            
-            // FIND A MOVE IF THERE IS ONE
-            MahjongSolitaireMove move = data.findMove();
-            if (move != null)
-                data.processMove(move);
+             data.undoLastMove();
+        }
+
+    }
+    
+    // Doesn't register keyReleased for some reason
+    @Override
+    public void keyReleased(KeyEvent ke)
+    {
+        if (ke.getKeyCode() == KeyEvent.VK_U)
+        {
+            System.out.println("U key pressed");
+            MahjongSolitaireDataModel data = (MahjongSolitaireDataModel)game.getDataModel();
+             data.undoLastMove();
         }
 
     }
