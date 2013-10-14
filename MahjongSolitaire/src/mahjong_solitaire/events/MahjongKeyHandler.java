@@ -61,6 +61,7 @@ public class MahjongKeyHandler extends KeyAdapter
         // KEY DOWN IT WILL CONTINUALLY CHEAT
         if (ke.getKeyCode() == KeyEvent.VK_U)
         {
+            System.out.println("U key pressed");
             MahjongSolitaireDataModel data = (MahjongSolitaireDataModel)game.getDataModel();
             
             // FIND A MOVE IF THERE IS ONE

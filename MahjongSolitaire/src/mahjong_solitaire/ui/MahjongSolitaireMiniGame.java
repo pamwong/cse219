@@ -24,6 +24,7 @@ import mahjong_solitaire.events.MahjongKeyHandler;
 import mahjong_solitaire.events.NewGameHandler;
 import mahjong_solitaire.events.SelectLevelHandler;
 import mahjong_solitaire.events.StatsHandler;
+import mahjong_solitaire.events.UndoHandler;
 
 /**
  * This is the actual mini game, as extended from the mini game framework. It
@@ -492,10 +493,6 @@ public class MahjongSolitaireMiniGame extends MiniGame
         NewGameHandler ngh = new NewGameHandler(this);
         guiButtons.get(NEW_GAME_BUTTON_TYPE).setActionListener(ngh);
 
-        // KEY LISTENER - LET'S US PROVIDE CUSTOM RESPONSES
-        MahjongKeyHandler mkh = new MahjongKeyHandler(this);
-        this.setKeyListener(mkh);
-
         // STATS BUTTON EVENT HANDLER
         StatsHandler sh = new StatsHandler(this);
         guiButtons.get(STATS_BUTTON_TYPE).setActionListener(sh);
@@ -503,6 +500,14 @@ public class MahjongSolitaireMiniGame extends MiniGame
         // BACK BUTTON EVENT HANDLER
         BackHandler bh = new BackHandler(this);
         guiButtons.get(BACK_BUTTON_TYPE).setActionListener(bh);
+        
+        // UNDO BUTTON EVENT HANDLER
+        UndoHandler uh = new UndoHandler(this);
+        guiButtons.get(UNDO_BUTTON_TYPE).setActionListener(uh);
+        
+        // KEY LISTENER - LET'S US PROVIDE CUSTOM RESPONSES
+        MahjongKeyHandler mkh = new MahjongKeyHandler(this);
+        this.setKeyListener(mkh);
         
         
     }
