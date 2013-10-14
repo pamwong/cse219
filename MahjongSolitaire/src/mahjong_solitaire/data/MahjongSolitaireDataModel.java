@@ -798,6 +798,25 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
         miniGame.getAudio().play(MahjongSolitairePropertyType.WIN_AUDIO_CUE.toString(), false);
     }
     
+    @Override
+    public void endGameAsLoss()
+    {
+        // UPDATE THE GAME STATE USING THE INHERITED FUNCTIONALITY
+        super.endGameAsLoss();
+        
+        // RECORD IT AS A LOSS
+        ((MahjongSolitaireMiniGame)miniGame).getPlayerRecord().addLoss(currentLevel);
+        ((MahjongSolitaireMiniGame)miniGame).savePlayerRecord();
+        
+        // DISPLAY THE LOSS DIALOG
+        miniGame.getGUIDialogs().get(LOSS_DIALOG_TYPE).setState(VISIBLE_STATE);
+        miniGame.getGUIButtons().get(TRY_AGAIN_TYPE).setState(VISIBLE_STATE);
+        
+        miniGame.getAudio().stop(MahjongSolitairePropertyType.SPLASH_SCREEN_SONG_CUE.toString()); 
+        miniGame.getAudio().stop(MahjongSolitairePropertyType.GAMEPLAY_SONG_CUE.toString());
+        miniGame.getAudio().play(MahjongSolitairePropertyType.LOSS_AUDIO_CUE.toString(), false);
+    }
+    
     /**
      * Called when a game is started, the game grid is reset.
      * 
@@ -852,6 +871,8 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
         // CLEAR ANY WIN OR LOSS DISPLAY
         miniGame.getGUIDialogs().get(WIN_DIALOG_TYPE).setState(INVISIBLE_STATE);
         miniGame.getGUIDialogs().get(STATS_DIALOG_TYPE).setState(INVISIBLE_STATE);
+        miniGame.getGUIDialogs().get(LOSS_DIALOG_TYPE).setState(INVISIBLE_STATE);
+        miniGame.getGUIButtons().get(TRY_AGAIN_TYPE).setState(INVISIBLE_STATE);
     }    
 
     /**
