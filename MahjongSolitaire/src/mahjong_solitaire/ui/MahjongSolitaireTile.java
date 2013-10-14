@@ -176,8 +176,15 @@ public class MahjongSolitaireTile extends Sprite
      */
     public boolean match(MahjongSolitaireTile testTile)
     {
-        // THIS DOESN'T WORK PROPERLY, IT SAYS EVERY TILE PAIR IS A MATCH
-        return true;
+        if(this.getTileType().equals("TILE_C_TYPE"))
+        {
+            if(this.getSpriteType() == testTile.getSpriteType())
+                return true;
+        }
+        else if(this.getTileType().equals(testTile.getTileType()))
+            return true;
+       
+        return false;
     }
         
     // PATHFINDING METHODS
