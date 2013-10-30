@@ -56,7 +56,6 @@ public class MahjongKeyHandler extends KeyAdapter
         // SHORT FIX FOR NOW
         if (ke.getKeyCode() == KeyEvent.VK_U)
         {
-            System.out.println("U key pressed");
             MahjongSolitaireDataModel data = (MahjongSolitaireDataModel)game.getDataModel();
              data.undoLastMove();
         }

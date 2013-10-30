@@ -833,9 +833,10 @@ public class MahjongSolitaireDataModel extends MiniGameDataModel
         ((MahjongSolitaireMiniGame)miniGame).getPlayerRecord().addLoss(currentLevel);
         ((MahjongSolitaireMiniGame)miniGame).savePlayerRecord();
         
-        // DISPLAY THE LOSS DIALOG
+        // DISPLAY THE LOSS DIALOG                      
         miniGame.getGUIDialogs().get(LOSS_DIALOG_TYPE).setState(VISIBLE_STATE);
         miniGame.getGUIButtons().get(TRY_AGAIN_TYPE).setState(VISIBLE_STATE);
+        miniGame.getGUIButtons().get(TRY_AGAIN_TYPE).setEnabled(true);
         
         miniGame.getAudio().stop(MahjongSolitairePropertyType.SPLASH_SCREEN_SONG_CUE.toString()); 
         miniGame.getAudio().stop(MahjongSolitairePropertyType.GAMEPLAY_SONG_CUE.toString());

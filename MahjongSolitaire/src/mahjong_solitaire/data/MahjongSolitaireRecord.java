@@ -14,7 +14,7 @@ import java.util.Iterator;
  * @author Richard McKenna
  */
 public class MahjongSolitaireRecord
-{
+{                   
     // HERE ARE ALL THE RECORDS
     private HashMap<String, MahjongLevelRecord> levelRecords;
 
@@ -110,7 +110,7 @@ public class MahjongSolitaireRecord
         if (rec == null)
             return Long.MAX_VALUE;
         // OTHERWISE RETURN THE FASTEST TIME
-        else
+        else        
             return rec.fastestTime; 
     }
 

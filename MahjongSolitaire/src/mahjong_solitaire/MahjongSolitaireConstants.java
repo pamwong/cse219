@@ -38,6 +38,8 @@ public class MahjongSolitaireConstants
     // DIALOG TYPES
     public static final String STATS_DIALOG_TYPE = "STATS_DIALOG_TYPE";
     public static final String WIN_DIALOG_TYPE = "WIN_DIALOG_TYPE";
+    public static final String LOSS_DIALOG_TYPE = "LOSS_DIALOG_TYPE";
+    public static final String TRY_AGAIN_TYPE = "TRY_AGAIN_TYPE";
     
     // WE'LL USE THESE STATES TO CONTROL SWITCHING BETWEEN THE TWO
     public static final String SPLASH_SCREEN_STATE = "SPLASH_SCREEN_STATE";
@@ -88,7 +90,9 @@ public class MahjongSolitaireConstants
     public static final int BACK_X = NEW_BUTTON_X + 130 + CONTROLS_MARGIN;
     public static final int BACK_Y = 0;
     public static final int TILE_TEXT_OFFSET = 60;
-    public static final int TIME_X = BACK_X + 130 + CONTROLS_MARGIN;
+    public static final int TILE_COUNT_X = BACK_X + 130 + CONTROLS_MARGIN;
+    public static final int TILE_COUNT_Y = 0;
+    public static final int TIME_X = TILE_COUNT_X + 232 + CONTROLS_MARGIN;
     public static final int TIME_Y = 0;
     public static final int TIME_OFFSET = 130;
     public static final int TIME_TEXT_OFFSET = 55;
@@ -101,8 +105,8 @@ public class MahjongSolitaireConstants
     public static final int TILE_STACK_OFFSET_X = 30;
     public static final int TILE_STACK_OFFSET_Y = 12;
     public static final int TILE_STACK_2_OFFSET_X = 105;
-    public static final int TILE_COUNT_X = TILE_STACK_X + 190 + CONTROLS_MARGIN;
-    public static final int TILE_COUNT_Y = 0;
+    public static final int TILE_COUNT_OFFSET = 142;
+    public static final int TILE_COUNT_TEXT_OFFSET = 57;
        
     // THESE ARE USED FOR FORMATTING THE TIME OF GAME
     public static final long MILLIS_IN_A_SECOND = 1000;
@@ -110,7 +114,7 @@ public class MahjongSolitaireConstants
     public static final long MILLIS_IN_AN_HOUR  = 1000 * 60 * 60;
 
     // USED FOR DOING OUR VICTORY ANIMATION
-    public static final int WIN_PATH_NODES = 4;
+    public static final int WIN_PATH_NODES = 6;
     public static final int WIN_PATH_TOLERANCE = 100;
     public static final int WIN_PATH_COORD = 100;
 

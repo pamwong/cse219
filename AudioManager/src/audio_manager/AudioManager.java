@@ -25,6 +25,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class AudioManager
 {
+
+    public void play(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public enum AudioManagerFileType
     {
         WAV,

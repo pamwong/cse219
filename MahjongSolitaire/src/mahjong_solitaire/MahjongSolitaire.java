@@ -123,6 +123,8 @@ public class MahjongSolitaire
         // AND THE DIALOGS
         STATS_DIALOG_IMAGE_NAME,
         WIN_DIALOG_IMAGE_NAME,
+        LOSS_DIALOG_IMAGE_NAME,
+        TRY_AGAIN_IMAGE_NAME,
         
         /* TILE LOADING STUFF */
         LEVEL_OPTIONS,
@@ -140,6 +142,7 @@ public class MahjongSolitaire
         UNDO_AUDIO_CUE,
         WIN_AUDIO_CUE,
         SPLASH_SCREEN_SONG_CUE,
-        GAMEPLAY_SONG_CUE
+        GAMEPLAY_SONG_CUE,
+        LOSS_AUDIO_CUE
     }
 }

@@ -2,6 +2,7 @@ package mahjong_solitaire.events;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import mahjong_solitaire.MahjongSolitaire;
 import mahjong_solitaire.ui.MahjongSolitaireMiniGame;
 
 /**
@@ -43,6 +44,7 @@ public class NewGameHandler implements ActionListener
         if (game.getDataModel().inProgress())
         {
             game.getDataModel().endGameAsLoss();
+            game.getAudio().stop(MahjongSolitaire.MahjongSolitairePropertyType.LOSS_AUDIO_CUE.toString());
         }
         // RESET THE GAME AND ITS DATA
         game.reset();

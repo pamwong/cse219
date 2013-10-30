@@ -20,14 +20,18 @@
         <property name="UNDO_BUTTON_IMAGE_NAME"             value="./zomjong/UIZomjongUndo.png"></property>
         <property name="UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME"  value="./zomjong/UIZomjongUndoMouseOver.png"></property>
         <property name="TILE_STACK_IMAGE_NAME"              value="./zomjong/UIZomjongTileStack.png"></property>
-		<property name = "BACK_BUTTON_IMAGE_NAME"			value="./zomjong/UIZomjongBack.png"></property>
-		<property name = "BACK_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zomjong/UIZomjongBackMouseOver.png"></property>
-		<property name = "UNDO_BUTTON_IMAGE_NAME"			value="./zomjong/UIZomjongUndo.png"></property>
-		<property name = "UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zomjong/UIZomjongUndoMouseOver.png"></property>
+		<property name ="BACK_BUTTON_IMAGE_NAME"			value="./zomjong/UIZomjongBack.png"></property>
+		<property name ="BACK_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zomjong/UIZomjongBackMouseOver.png"></property>
+		<property name ="UNDO_BUTTON_IMAGE_NAME"			value="./zomjong/UIZomjongUndo.png"></property>
+		<property name ="UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zomjong/UIZomjongUndoMouseOver.png"></property>
+		<property name ="TILE_COUNT_IMAGE_NAME"				value="./zomjong/UIZomjongTilesCountContainer.png"></property>
 
         <!-- DIALOG IMAGES -->
         <property name="WIN_DIALOG_IMAGE_NAME"             value="./zomjong/UIZomjongWinDialog.png"></property>
         <property name="STATS_DIALOG_IMAGE_NAME"           value="./zomjong/UIZomjongStatsDialog.png"></property>
+		<property name="LOSS_DIALOG_IMAGE_NAME"				value="./zomjong/UIZomjongLossDialog.png"></property>
+		<property name="TRY_AGAIN_IMAGE_NAME"				value="./zomjong/UIZomjongTryAgain.png"></property>
+		
 
         <!-- BASE TILE RENDERING IMAGES -->
         <property name="BLANK_TILE_IMAGE_NAME"              value="./zomjong/UIZomjongBlankTile.png"></property>
@@ -41,7 +45,8 @@
         <property name="UNDO_AUDIO_CUE"                     value="./zomjong/AudioZomjongUndo.wav"></property>
         <property name="WIN_AUDIO_CUE"                      value="./zomjong/AudioZomjongWin.wav"></property>
         <property name="SPLASH_SCREEN_SONG_CUE"             value="./zomjong/AudioZomjongSplashScreenSong.mid"></property>
-        <property name="GAMEPLAY_SONG_CUE"                  value="./zomjong/AudioZomjongInGameSong.mid"></property>        
+        <property name="GAMEPLAY_SONG_CUE"                  value="./zomjong/AudioZomjongInGameSong.mid"></property> 
+		<property name="LOSS_AUDIO_CUE"						value="./zomjong/AudioZomjongLoss.wav"></property>
     </property_list>
     <property_options_list>
         <property_options name="LEVEL_OPTIONS">
@@ -56,14 +61,14 @@
             <option>./zomjong/LevelTriPeak.png</option>
             <option>./zomjong/LevelTurtle.png</option>
             <option>./zomjong/LevelQuilt.png</option>
-			<option>./zomjong/LevelQuilt.png</option>
+			<option>./zomjong/LevelOcho.png</option>
         </property_options>
         <property_options name="LEVEL_MOUSE_OVER_IMAGE_OPTIONS">
             <option>./zomjong/LevelColiseumMouseOver.png</option>
             <option>./zomjong/LevelTriPeakMouseOver.png</option>
             <option>./zomjong/LevelTurtleMouseOver.png</option>
             <option>./zomjong/LevelQuiltMouseOver.png</option>
-			<option>./zomjong/LevelQuiltMouseOver.png</option>
+			<option>./zomjong/LevelOchoMouseOver.png</option>
         </property_options>
         <!-- THERE WILL ONLY BE ONE OF EACH OF THESE
              AND THEY CAN BE MATCHED WITH EACH OTHER -->

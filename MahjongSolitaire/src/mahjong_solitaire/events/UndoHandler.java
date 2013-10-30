@@ -14,7 +14,7 @@ import mahjong_solitaire.ui.MahjongSolitaireMiniGame;
  */
 public class UndoHandler implements ActionListener
 {
-    // HERE'S THE D
+    
     private MahjongSolitaireMiniGame game;
     
     /**

@@ -193,8 +193,10 @@ public class MahjongSolitairePanel extends JPanel
             String time = data.gameTimeToText();
             int x = TIME_X + TIME_OFFSET;
             int y = TIME_Y + TIME_TEXT_OFFSET;
-            g.setFont(new Font("default", Font.BOLD, 40));
+            g.setFont(TEXT_DISPLAY_FONT);
+            g.setColor(Color.BLACK);
             g.drawString(time, x, y);
+            
         }
         if (((MahjongSolitaireMiniGame)game).isCurrentScreenState(GAME_SCREEN_STATE) || data.isPaused())
         {
@@ -202,7 +204,8 @@ public class MahjongSolitairePanel extends JPanel
             String tileCount = "" + tilesLeft;
             int x = TILE_COUNT_X + TILE_COUNT_OFFSET;
             int y = TILE_COUNT_Y + TILE_COUNT_TEXT_OFFSET;
-            g.setFont(new Font("default", Font.BOLD, 40));
+            g.setFont(TEXT_DISPLAY_FONT);
+            g.setColor(Color.BLACK);
             g.drawString(tileCount, x, y);
         }
         

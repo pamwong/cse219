@@ -1,4 +1,4 @@
-package mahjong_solitaire.data;
+        package mahjong_solitaire.data;
 
 /**
  * This class stores game results for a given level. Note that this is
