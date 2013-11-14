@@ -21,8 +21,13 @@
         <property name="QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME"   value="./zombiecrush/quitmouseover.png"></property>
 
 		<!-- GAME SCREEN NORTH TOOLBAR UI IMAGES -->
+		<property name="SCROLL_UP_IMAGE_NAME"				value="./zombiecrush/scrollup.png"></property>
+		<property name="SCROLL_UP_MOUSE_OVER_IMAGE_NAME"	value="./zombiecrush/scrolluphighlight.png"></property>
+		<property name="SCROLL_DOWN_IMAGE_NAME"				value="./zombiecrush/scrolldown.png"></property>
+		<property name="SCROLL_DOWN_MOUSE_OVER_IMAGE_NAME"	value="./zombiecrush/scrolldownhighlight.png"></property>
 		<property name="LIVES_IMAGE_NAME"					value="./zombiecrush/lives.png"></property>
 		<property name="LEVEL_IMAGE_NAME"					value="./zombiecrush/level.png"></property>
+		<property name="TOOLBAR_IMAGE_NAME"					value="./zombiecrush/toolbar.png"></property>
 
         <!-- GAME SCREEN NORTH TOOLBAR UI IMAGES -->
         <property name="NEW_BUTTON_IMAGE_NAME"              value="./zombiecrush/UIzombiecrushNewGame.png"></property>

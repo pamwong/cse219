@@ -22,6 +22,7 @@ public class ZombieCrushSagaConstants
     
     // EACH SCREEN HAS ITS OWN BACKGROUND TYPE
     public static final String BACKGROUND_TYPE = "BACKGROUND_TYPE";
+    public static final String SAGA_TYPE = "SAGA_TYPE";
     
     // THIS REPRESENTS THE BUTTONS ON THE SPLASH SCREEN FOR LEVEL SELECTION
     public static final String LEVEL_SELECT_BUTTON_TYPE = "LEVEL_SELECT_BUTTON_TYPE";
@@ -30,6 +31,11 @@ public class ZombieCrushSagaConstants
     public static final String PLAY_GAME_BUTTON_TYPE = "PLAY_GAME_BUTTON_TYPE";
     public static final String RESET_GAME_BUTTON_TYPE = "RESET_GAME_BUTTON_TYPE";
     public static final String QUIT_GAME_BUTTON_TYPE = "QUIT_GAME_BUTTON_TYPE";
+    
+    // SAGA SCREEN CONTROL TYPES
+    public static final String TOOLBAR_TYPE = "TOOLBAR_TYPE";
+    public static final String SCROLL_UP_TYPE = "SCROLL_UP_TYPE";
+    public static final String SCROLL_DOWN_TYPE = "SCROLL_DOWN_TYPE";
 
     // IN-GAME UI CONTROL TYPES
     public static final String NEW_GAME_BUTTON_TYPE = "NEW_GAME_BUTTON_TYPE";
@@ -89,6 +95,16 @@ public class ZombieCrushSagaConstants
     // FOR MOVING TILES AROUND
     public static final int MAX_TILE_VELOCITY = 70;
     
+    
+    // SAGA SCREEN BACKGROUND POSITION
+    public static final int SAGA_X = 0;
+    public static int SAGA_Y = -2900;
+    public static final int TOOLBAR_X = 0;
+    public static final int TOOLBAR_Y = 0;
+    public static final int SCROLLUP_X = 1150;
+    public static final int SCROLLUP_Y = 0;
+    public static final int SCROLLDOWN_X = 1200;
+    public static final int SCROLLDOWN_Y = 0;
     
     // UI CONTROLS POSITIONS IN THE SPLASH SCREEN
     public static final int SPLASH_SCREEN_MARGIN = 400;

@@ -183,7 +183,8 @@ public class ZombieCrushSagaMiniGame extends MiniGame
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         
         // CHANGE THE BACKGROUND
-        guiDecor.get(BACKGROUND_TYPE).setState(SAGA_SCREEN_STATE);
+        guiDecor.get(SAGA_TYPE).setState(SAGA_SCREEN_STATE);
+        guiDecor.get(TOOLBAR_TYPE).setState(VISIBLE_STATE);
         
         // DISABLE SPLASH SCREEN, WE CAN NEVER GO BACK
         guiButtons.get(PLAY_GAME_BUTTON_TYPE).setState(INVISIBLE_STATE);
@@ -192,11 +193,34 @@ public class ZombieCrushSagaMiniGame extends MiniGame
         guiButtons.get(RESET_GAME_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(QUIT_GAME_BUTTON_TYPE).setState(INVISIBLE_STATE);
         guiButtons.get(QUIT_GAME_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SCROLL_UP_TYPE).setState(VISIBLE_STATE);
+        guiButtons.get(SCROLL_UP_TYPE).setEnabled(true);
+        guiButtons.get(SCROLL_DOWN_TYPE).setState(VISIBLE_STATE);
+        guiButtons.get(SCROLL_DOWN_TYPE).setEnabled(true);
+       
+       
+       
        
         // AND CHANGE THE SCREEN STATE
         currentScreenState = SAGA_SCREEN_STATE;
     }
     
+    public void scrollUp()
+    {
+
+        if(SAGA_Y < 0)
+        SAGA_Y = SAGA_Y + 50;
+        guiDecor.get(SAGA_TYPE).setY(SAGA_Y);
+    }
+    
+    public void scrollDown()
+    {
+   
+        if(SAGA_Y > -2900)
+        SAGA_Y = SAGA_Y - 50;
+        guiDecor.get(SAGA_TYPE).setY(SAGA_Y);    
+        
+    }
     /**
      * This method switches the application to the splash screen, making
      * all the appropriate UI controls visible & invisible.
@@ -329,11 +353,17 @@ public class ZombieCrushSagaMiniGame extends MiniGame
         img = loadImage(imgPath + props.getProperty(ZombieCrushSagaPropertyType.SPLASH_SCREEN_IMAGE_NAME));
         sT = new SpriteType(BACKGROUND_TYPE);
         sT.addState(SPLASH_SCREEN_STATE, img);
-        
-        img = loadImage(imgPath + props.getProperty(ZombieCrushSagaPropertyType.SAGA_SCREEN_IMAGE_NAME));
-        sT.addState(SAGA_SCREEN_STATE, img);
         s = new Sprite(sT, 0, 0, 0, 0, SPLASH_SCREEN_STATE);
         guiDecor.put(BACKGROUND_TYPE, s);
+        
+        img = loadImage(imgPath + props.getProperty(ZombieCrushSagaPropertyType.SAGA_SCREEN_IMAGE_NAME));
+        sT = new SpriteType(SAGA_TYPE);
+        sT.addState(SAGA_SCREEN_STATE, img);
+        s = new Sprite(sT, SAGA_X, SAGA_Y, 0, 0, INVISIBLE_STATE);
+        guiDecor.put(SAGA_TYPE, s);
+        
+
+        
         
         // ADD SPLASH SCREEN BUTTONS
         // PLAY BUTTON
@@ -369,6 +399,38 @@ public class ZombieCrushSagaMiniGame extends MiniGame
         s = new Sprite(sT, QUIT_BUTTON_X, QUIT_BUTTON_Y, 0, 0, VISIBLE_STATE);
         guiButtons.put(QUIT_GAME_BUTTON_TYPE, s);
         
+        // LOAD TOOLBAR
+        String toolbar = props.getProperty(ZombieCrushSagaPropertyType.TOOLBAR_IMAGE_NAME);
+        sT = new SpriteType(TOOLBAR_TYPE);
+        img = loadImage(imgPath + toolbar);
+        sT.addState(VISIBLE_STATE, img);
+        s = new Sprite(sT, TOOLBAR_X, TOOLBAR_Y, 0, 0, INVISIBLE_STATE);
+        guiDecor.put(TOOLBAR_TYPE, s);
+        
+        // AND SCROLL UP
+        String scrollupButton = props.getProperty(ZombieCrushSagaPropertyType.SCROLL_UP_IMAGE_NAME);
+        sT = new SpriteType(SCROLL_UP_TYPE);
+	img = loadImage(imgPath + scrollupButton);
+        sT.addState(VISIBLE_STATE, img);
+        String scrollupMouseOverButton = props.getProperty(ZombieCrushSagaPropertyType.SCROLL_UP_MOUSE_OVER_IMAGE_NAME);
+        img = loadImage(imgPath + scrollupMouseOverButton);
+        sT.addState(MOUSE_OVER_STATE, img);
+        s = new Sprite(sT, SCROLLUP_X, SCROLLUP_Y, 0, 0, INVISIBLE_STATE);
+        guiButtons.put(SCROLL_UP_TYPE, s);
+        
+        // AND SCROLL DOWN
+        String scrolldownButton = props.getProperty(ZombieCrushSagaPropertyType.SCROLL_DOWN_IMAGE_NAME);
+        sT = new SpriteType(SCROLL_DOWN_TYPE);
+	img = loadImage(imgPath + scrolldownButton);
+        sT.addState(VISIBLE_STATE, img);
+        String scrolldownMouseOverButton = props.getProperty(ZombieCrushSagaPropertyType.SCROLL_DOWN_MOUSE_OVER_IMAGE_NAME);
+        img = loadImage(imgPath + scrolldownMouseOverButton);
+        sT.addState(MOUSE_OVER_STATE, img);
+        s = new Sprite(sT, SCROLLDOWN_X, SCROLLDOWN_Y, 0, 0, INVISIBLE_STATE);
+        guiButtons.put(SCROLL_DOWN_TYPE, s);
+        
+        
+        
       
     }		
     
@@ -392,6 +454,12 @@ public class ZombieCrushSagaMiniGame extends MiniGame
         
         QuitHandler qh = new QuitHandler(this);
         guiButtons.get(QUIT_GAME_BUTTON_TYPE).setActionListener(qh);
+        
+        ScrollDownHandler sdh = new ScrollDownHandler(this);
+        guiButtons.get(SCROLL_DOWN_TYPE).setActionListener(sdh);
+        
+        ScrollUpHandler suh = new ScrollUpHandler(this);
+        guiButtons.get(SCROLL_UP_TYPE).setActionListener(suh);
     }
     
     /**
