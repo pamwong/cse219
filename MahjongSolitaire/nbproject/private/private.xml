@@ -3,20 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/data/MahjongSolitaireRecord.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/data/MahjongLevelRecord.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/BackHandler.java</file>
             <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/ui/MahjongSolitairePanel.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/data/MahjongSolitaireMove.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/ui/MahjongSolitaireMiniGame.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/NewGameHandler.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/MahjongKeyHandler.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/MahjongSolitaire.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/ExitHandler.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/StatsHandler.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/data/MahjongSolitaireDataModel.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/events/SelectLevelHandler.java</file>
-            <file>file:/C:/Users/Pam/Documents/GitHub/cse219/MahjongSolitaire/src/mahjong_solitaire/file/MahjongSolitaireFileManager.java</file>
         </group>
     </open-files>
 </project-private>

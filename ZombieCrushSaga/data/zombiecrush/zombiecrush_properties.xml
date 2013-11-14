@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The properties in this file are specific to the zombiecrush flavor of the game.
+-->
+<properties>
+    <property_list>    
+        <property name="GAME_TITLE_TEXT"            value="Zombie Crush Saga"></property>
+        <property name="WINDOW_ICON"                value="./zombiecrush/TileDayPlantChomper.png"></property>
+        
+        <!-- BIG, FULL VIEWPORT BACKGROUND SCREEN IMAGES -->
+        <property name="SPLASH_SCREEN_IMAGE_NAME"   value="./zombiecrush/splashscreen.png"></property>
+        <property name="GAME_BACKGROUND_IMAGE_NAME" value="./zombiecrush/backgroundscreen.png"></property>
+		<property name="SAGA_SCREEN_IMAGE_NAME"		value="./zombiecrush/sagascreen.png"></property>
+        
+		<!-- SPLASH SCREEN UI IMAGES -->
+		<property name="PLAY_BUTTON_IMAGE_NAME"              value="./zombiecrush/play.png"></property>
+        <property name="PLAY_BUTTON_MOUSE_OVER_IMAGE_NAME"   value="./zombiecrush/playmouseover.png"></property>
+        <property name="RESET_BUTTON_IMAGE_NAME"             value="./zombiecrush/reset.png"></property>
+		<property name="RESET_BUTTON_MOUSE_OVER_IMAGE_NAME"  value="./zombiecrush/resetmouseover.png"></property>
+		<property name="QUIT_BUTTON_IMAGE_NAME"              value="./zombiecrush/quit.png"></property>
+        <property name="QUIT_BUTTON_MOUSE_OVER_IMAGE_NAME"   value="./zombiecrush/quitmouseover.png"></property>
+
+		<!-- GAME SCREEN NORTH TOOLBAR UI IMAGES -->
+		<property name="LIVES_IMAGE_NAME"					value="./zombiecrush/lives.png"></property>
+		<property name="LEVEL_IMAGE_NAME"					value="./zombiecrush/level.png"></property>
+
+        <!-- GAME SCREEN NORTH TOOLBAR UI IMAGES -->
+        <property name="NEW_BUTTON_IMAGE_NAME"              value="./zombiecrush/UIzombiecrushNewGame.png"></property>
+        <property name="NEW_BUTTON_MOUSE_OVER_IMAGE_NAME"   value="./zombiecrush/UIzombiecrushNewGameMouseOver.png"></property>
+        <property name="TIME_IMAGE_NAME"                    value="./zombiecrush/UIzombiecrushTimeContainer.png"></property>
+        <property name="STATS_BUTTON_IMAGE_NAME"            value="./zombiecrush/UIzombiecrushStats.png"></property>
+        <property name="STATS_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zombiecrush/UIzombiecrushStatsMouseOver.png"></property>
+        <property name="UNDO_BUTTON_IMAGE_NAME"             value="./zombiecrush/UIzombiecrushUndo.png"></property>
+        <property name="UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME"  value="./zombiecrush/UIzombiecrushUndoMouseOver.png"></property>
+        <property name="TILE_STACK_IMAGE_NAME"              value="./zombiecrush/UIzombiecrushTileStack.png"></property>
+		<property name ="BACK_BUTTON_IMAGE_NAME"			value="./zombiecrush/UIzombiecrushBack.png"></property>
+		<property name ="BACK_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zombiecrush/UIzombiecrushBackMouseOver.png"></property>
+		<property name ="UNDO_BUTTON_IMAGE_NAME"			value="./zombiecrush/UIzombiecrushUndo.png"></property>
+		<property name ="UNDO_BUTTON_MOUSE_OVER_IMAGE_NAME" value="./zombiecrush/UIzombiecrushUndoMouseOver.png"></property>
+		<property name ="TILE_COUNT_IMAGE_NAME"				value="./zombiecrush/UIzombiecrushTilesCountContainer.png"></property>
+
+        <!-- DIALOG IMAGES -->
+        <property name="WIN_DIALOG_IMAGE_NAME"             value="./zombiecrush/UIzombiecrushWinDialog.png"></property>
+        <property name="STATS_DIALOG_IMAGE_NAME"           value="./zombiecrush/UIzombiecrushStatsDialog.png"></property>
+		<property name="LOSS_DIALOG_IMAGE_NAME"				value="./zombiecrush/UIzombiecrushLossDialog.png"></property>
+		<property name="TRY_AGAIN_IMAGE_NAME"				value="./zombiecrush/UIzombiecrushTryAgain.png"></property>
+		
+
+        <!-- BASE TILE RENDERING IMAGES -->
+        <property name="BLANK_TILE_IMAGE_NAME"              value="./zombiecrush/UIzombiecrushBlankTile.png"></property>
+        <property name="BLANK_TILE_SELECTED_IMAGE_NAME"     value="./zombiecrush/UIzombiecrushBlankTileSelected.png"></property>
+        
+        <!-- AUDIO FILES -->
+        <property name="SELECT_AUDIO_CUE"                   value="./zombiecrush/AudiozombiecrushSelectTile.wav"></property>
+        <property name="MATCH_AUDIO_CUE"                    value="./zombiecrush/AudiozombiecrushMatchFound.wav"></property>
+        <property name="NO_MATCH_AUDIO_CUE"                 value="./zombiecrush/AudiozombiecrushTilesDoNotMatch.wav"></property>
+        <property name="BLOCKED_TILE_AUDIO_CUE"             value="./zombiecrush/AudiozombiecrushBlockedTile.wav"></property>
+        <property name="UNDO_AUDIO_CUE"                     value="./zombiecrush/AudiozombiecrushUndo.wav"></property>
+        <property name="WIN_AUDIO_CUE"                      value="./zombiecrush/AudiozombiecrushWin.wav"></property>
+        <property name="SPLASH_SCREEN_SONG_CUE"             value="./zombiecrush/AudiozombiecrushSplashScreenSong.mid"></property>
+        <property name="GAMEPLAY_SONG_CUE"                  value="./zombiecrush/AudiozombiecrushInGameSong.mid"></property> 
+		<property name="LOSS_AUDIO_CUE"						value="./zombiecrush/AudiozombiecrushLoss.wav"></property>
+    </property_list>
+    <property_options_list>
+        <property_options name="LEVEL_OPTIONS">
+            <option>./zombiecrush/Coliseum.zom</option>
+            <option>./zombiecrush/TriPeak.zom</option>
+            <option>./zombiecrush/Turtle.zom</option>
+            <option>./zombiecrush/Quilt.zom</option>
+			<option>./zombiecrush/Ocho.zom</option>
+        </property_options>
+        <property_options name="LEVEL_IMAGE_OPTIONS">
+            <option>./zombiecrush/LevelColiseum.png</option>
+            <option>./zombiecrush/LevelTriPeak.png</option>
+            <option>./zombiecrush/LevelTurtle.png</option>
+            <option>./zombiecrush/LevelQuilt.png</option>
+			<option>./zombiecrush/LevelOcho.png</option>
+        </property_options>
+        <property_options name="LEVEL_MOUSE_OVER_IMAGE_OPTIONS">
+            <option>./zombiecrush/LevelColiseumMouseOver.png</option>
+            <option>./zombiecrush/LevelTriPeakMouseOver.png</option>
+            <option>./zombiecrush/LevelTurtleMouseOver.png</option>
+            <option>./zombiecrush/LevelQuiltMouseOver.png</option>
+			<option>./zombiecrush/LevelOchoMouseOver.png</option>
+        </property_options>
+        <!-- THERE WILL ONLY BE ONE OF EACH OF THESE
+             AND THEY CAN BE MATCHED WITH EACH OTHER -->
+        <property_options name="TYPE_A_TILES">
+            <option>./zombiecrush/TileDayPlantChomper.png</option>
+            <option>./zombiecrush/TileDayPlantPeashooter.png</option>
+            <option>./zombiecrush/TileDayPLantSnowPea.png</option>
+            <option>./zombiecrush/TileDayPlantSunflower.png</option>
+        </property_options>
+        <!-- THERE WILL ONLY BE ONE OF EACH OF THESE
+             AND THEY CAN BE MATCHED WITH EACH OTHER -->
+        <property_options name="TYPE_B_TILES">
+            <option>./zombiecrush/TileNightPlantFumeShroom.png</option>
+            <option>./zombiecrush/TileNightPlantHypnoShroom.png</option>
+            <option>./zombiecrush/TileNightPlantScaredyShroom.png</option>
+            <option>./zombiecrush/TileNightPlantSunShroom.png</option>
+        </property_options>
+        <!-- THERE WILL BE FOUR OF EACH OF TEHSE AND
+            THESE CAN ONLY MATCH WITH THEMSELVES -->
+        <property_options name="TYPE_C_TILES">
+            <option>./zombiecrush/TileZombieBackupDancer.png</option>
+            <option>./zombiecrush/TileZombieBalloon.png</option>
+            <option>./zombiecrush/TileZombieBaseball.png</option>
+            <option>./zombiecrush/TileZombieBobsledTeam.png</option>
+            <option>./zombiecrush/TileZombieBuckethead.png</option>
+            <option>./zombiecrush/TileZombieBungee.png</option>
+            <option>./zombiecrush/TileZombieCatapult.png</option>
+            <option>./zombiecrush/TileZombieConehead.png</option>
+            <option>./zombiecrush/TileZombieDancing.png</option>
+            <option>./zombiecrush/TileZombieDigger.png</option>
+            <option>./zombiecrush/TileZombieDolphinRider.png</option>
+            <option>./zombiecrush/TileZombieDrZomboss.png</option>
+            <option>./zombiecrush/TileZombieDuckyTube.png</option>
+            <option>./zombiecrush/TileZombieFlag.png</option>
+            <option>./zombiecrush/TileZombieFootball.png</option>
+            <option>./zombiecrush/TileZombieGargantuar.png</option>
+            <option>./zombiecrush/TileZombieGatlingPeaShooter.png</option>
+            <option>./zombiecrush/TileZombieGigaFootball.png</option>
+            <option>./zombiecrush/TileZombieGigaGargantuar.png</option>
+            <option>./zombiecrush/TileZombieImp.png</option>
+            <option>./zombiecrush/TileZombieJackInTheBox.png</option>
+            <option>./zombiecrush/TileZombieJalapeno.png</option>
+            <option>./zombiecrush/TileZombieLadder.png</option>
+            <option>./zombiecrush/TileZombieNewspaper.png</option>
+            <option>./zombiecrush/TileZombiePeashooter.png</option>
+            <option>./zombiecrush/TileZombiePogo.png</option>
+            <option>./zombiecrush/TileZombiePoleVaulting.png</option>
+            <option>./zombiecrush/TileZombieScreenDoor.png</option>
+            <option>./zombiecrush/TileZombieSnorkel.png</option>
+            <option>./zombiecrush/TileZombieSquash.png</option>
+            <option>./zombiecrush/TileZombieTarget.png</option>
+            <option>./zombiecrush/TileZombieTrashCan.png</option>
+            <option>./zombiecrush/TileZombieYeti.png</option>
+            <option>./zombiecrush/TileZombieZomboni.png</option>
+        </property_options>
+    </property_options_list>
+</properties>
